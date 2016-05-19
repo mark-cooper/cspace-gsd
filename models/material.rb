@@ -1,4 +1,5 @@
 class Material < ActiveRecord::Base
+  has_many :properties, primary_key: :material_id, foreign_key: :material_id
   before_save :sanitize
 
   def sanitize

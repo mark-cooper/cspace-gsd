@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519064401) do
+ActiveRecord::Schema.define(version: 20160519153542) do
 
   create_table "materials", force: :cascade do |t|
-    t.integer  "material_id"
+    t.integer  "material_id",        null: false
     t.string   "material_name"
     t.integer  "year_introduced"
     t.string   "generic_name"
@@ -31,5 +31,15 @@ ActiveRecord::Schema.define(version: 20160519064401) do
     t.string   "photo_status"
     t.string   "editor"
   end
+
+  add_index "materials", ["material_id"], name: "index_materials_on_material_id"
+
+  create_table "properties", force: :cascade do |t|
+    t.integer  "material_id",   null: false
+    t.string   "property_name"
+    t.datetime "dtime"
+  end
+
+  add_index "properties", ["material_id"], name: "index_properties_on_material_id"
 
 end
