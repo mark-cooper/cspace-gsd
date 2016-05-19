@@ -4,6 +4,8 @@ class Material < ActiveRecord::Base
   has_many :material_processes,    primary_key: :material_id, foreign_key: :material_id
   has_many :material_properties,   primary_key: :material_id, foreign_key: :material_id
 
+  belongs_to :vendor, primary_key: :vendor_id, foreign_key: :vendor_id
+
   before_save :sanitize
 
   def sanitize

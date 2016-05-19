@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519220334) do
+ActiveRecord::Schema.define(version: 20160519224138) do
 
   create_table "material_compositions", force: :cascade do |t|
     t.integer  "material_id",      null: false
@@ -46,14 +46,14 @@ ActiveRecord::Schema.define(version: 20160519220334) do
   add_index "material_properties", ["material_id"], name: "index_material_properties_on_material_id"
 
   create_table "materials", force: :cascade do |t|
-    t.integer  "material_id",        null: false
+    t.integer  "material_id",                    null: false
     t.string   "material_name"
     t.integer  "year_introduced"
     t.string   "generic_name"
     t.text     "description"
     t.string   "hollis_notes"
     t.string   "course_notes"
-    t.integer  "vendor_id"
+    t.integer  "vendor_id",          default: 0, null: false
     t.string   "accession_number"
     t.string   "library_location"
     t.string   "name_type"
@@ -65,5 +65,24 @@ ActiveRecord::Schema.define(version: 20160519220334) do
   end
 
   add_index "materials", ["material_id"], name: "index_materials_on_material_id"
+  add_index "materials", ["vendor_id"], name: "index_materials_on_vendor_id"
+
+  create_table "vendors", force: :cascade do |t|
+    t.integer  "vendor_id",      null: false
+    t.string   "vendor_name"
+    t.string   "website"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "email"
+    t.string   "contact"
+    t.datetime "dtime"
+  end
+
+  add_index "vendors", ["vendor_id"], name: "index_vendors_on_vendor_id"
 
 end
