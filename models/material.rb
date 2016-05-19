@@ -1,7 +1,8 @@
 class Material < ActiveRecord::Base
-  has_many :material_forms,      primary_key: :material_id, foreign_key: :material_id
-  has_many :material_processes,  primary_key: :material_id, foreign_key: :material_id
-  has_many :material_properties, primary_key: :material_id, foreign_key: :material_id
+  has_many :material_compositions, primary_key: :material_id, foreign_key: :material_id
+  has_many :material_forms,        primary_key: :material_id, foreign_key: :material_id
+  has_many :material_processes,    primary_key: :material_id, foreign_key: :material_id
+  has_many :material_properties,   primary_key: :material_id, foreign_key: :material_id
 
   before_save :sanitize
 
@@ -19,8 +20,17 @@ class Material < ActiveRecord::Base
   def to_cspace_xml
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.root {
+        xml.compositions {
+          self.material_compositions.map { |p| p.composition_name.split("-", 2) }.each do |p|
+            family_name, class_name = p
+            xml.composition {
+              xml.family_name family_name
+              xml.class_name  class_name
+            }
+          end
+        }
         xml.forms {
-          self.material_form.each do |p|
+          self.material_forms.each do |p|
             xml.form_name p.form_name
           end
         }
