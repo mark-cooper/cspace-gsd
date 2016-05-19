@@ -1,6 +1,8 @@
 class Material < ActiveRecord::Base
+  has_many :material_forms,      primary_key: :material_id, foreign_key: :material_id
   has_many :material_processes,  primary_key: :material_id, foreign_key: :material_id
   has_many :material_properties, primary_key: :material_id, foreign_key: :material_id
+
   before_save :sanitize
 
   def sanitize
@@ -17,6 +19,11 @@ class Material < ActiveRecord::Base
   def to_cspace_xml
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.root {
+        xml.forms {
+          self.material_form.each do |p|
+            xml.form_name p.form_name
+          end
+        }
         xml.processes {
           self.material_processes.each do |p|
             xml.process_name p.process_name

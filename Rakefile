@@ -7,6 +7,7 @@ require 'csv'
 namespace :csv do
 
   # rake csv:seed[material,db/data/materials.csv]
+  # rake csv:seed[material_form,db/data/material2form.csv]
   # rake csv:seed[material_process,db/data/material2process.csv]
   # rake csv:seed[material_property,db/data/material2property.csv]
   desc "Seed model data from CSV"
