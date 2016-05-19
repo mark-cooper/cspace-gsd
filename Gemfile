@@ -9,3 +9,6 @@ gem 'sqlite3', '~> 1.3.11'
 # Debugging
 gem 'pry'
 gem 'pry-byebug'
+
+# XML
+gem 'nokogiri'

@@ -13,6 +13,15 @@ class Material < ActiveRecord::Base
   end
 
   def to_cspace_xml
-    #
+    builder = Nokogiri::XML::Builder.new do |xml|
+      xml.root {
+        xml.properties {
+          self.properties.each do |p|
+            xml.property_name p.property_name
+          end
+        }
+      }
+    end
+    puts builder.to_xml
   end
 end

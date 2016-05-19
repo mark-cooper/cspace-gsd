@@ -20,6 +20,7 @@ namespace :csv do
       }) do |row|
         data = row.to_hash
         model.send(:create!, data)
+        break
     end
   end
 end
