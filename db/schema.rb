@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519153542) do
+ActiveRecord::Schema.define(version: 20160519205510) do
+
+  create_table "material_processes", force: :cascade do |t|
+    t.integer  "material_id",  null: false
+    t.string   "process_name"
+    t.datetime "dtime"
+  end
+
+  add_index "material_processes", ["material_id"], name: "index_material_processes_on_material_id"
 
   create_table "material_properties", force: :cascade do |t|
     t.integer  "material_id",   null: false

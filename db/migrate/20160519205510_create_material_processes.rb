@@ -1,8 +1,8 @@
-class CreateProperties < ActiveRecord::Migration
+class CreateMaterialProcesses < ActiveRecord::Migration
   def change
-    create_table :material_properties do |t|
+    create_table :material_processes do |t|
       t.references :material, index: true, null: false
-      t.string     :property_name
+      t.string     :process_name
       t.datetime   :dtime
     end
 
