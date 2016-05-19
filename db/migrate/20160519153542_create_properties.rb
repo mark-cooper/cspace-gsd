@@ -1,6 +1,6 @@
 class CreateProperties < ActiveRecord::Migration
   def change
-    create_table :properties do |t|
+    create_table :material_properties do |t|
       t.references  :material, index: true, null: false
       t.string      :property_name
       t.datetime    :dtime

@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20160519153542) do
 
+  create_table "material_properties", force: :cascade do |t|
+    t.integer  "material_id",   null: false
+    t.string   "property_name"
+    t.datetime "dtime"
+  end
+
+  add_index "material_properties", ["material_id"], name: "index_material_properties_on_material_id"
+
   create_table "materials", force: :cascade do |t|
     t.integer  "material_id",        null: false
     t.string   "material_name"
@@ -33,13 +41,5 @@ ActiveRecord::Schema.define(version: 20160519153542) do
   end
 
   add_index "materials", ["material_id"], name: "index_materials_on_material_id"
-
-  create_table "properties", force: :cascade do |t|
-    t.integer  "material_id",   null: false
-    t.string   "property_name"
-    t.datetime "dtime"
-  end
-
-  add_index "properties", ["material_id"], name: "index_properties_on_material_id"
 
 end

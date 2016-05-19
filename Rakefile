@@ -7,10 +7,10 @@ require 'csv'
 namespace :csv do
 
   # rake csv:seed[material,db/data/materials.csv]
-  # rake csv:seed[property,db/data/material2property.csv]
+  # rake csv:seed[material_property,db/data/material2property.csv]
   desc "Seed model data from CSV"
   task :seed, [:model, :csv] => :environment do |t, args|
-    model = Kernel.const_get args[:model].downcase.capitalize
+    model = Kernel.const_get args[:model].downcase.camelize
     csv   = args[:csv]
 
     csv_row_counter = 0
