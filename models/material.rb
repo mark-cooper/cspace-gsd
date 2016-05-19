@@ -6,6 +6,7 @@ class Material < ActiveRecord::Base
     { 
       strip: [],
       squeeze: ["\n"],
+      squeeze: [" "],
       gsub: [Regexp.new("(\n|\t)"), " "]
     }.each do |method, args|
       self.attributes.each { |a, v| self[a] = v.send method, *args if v.respond_to? method }
