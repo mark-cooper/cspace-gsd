@@ -11,8 +11,8 @@ namespace :csv do
   # rake csv:seed[material_form,db/data/material2form.csv]
   # rake csv:seed[material_process,db/data/material2process.csv]
   # rake csv:seed[material_property,db/data/material2property.csv]
-  # rake csv:seed[vendor,db/data/vendors.csv]
   # rake csv:seed[material_map,db/material_maps.csv]
+  # rake csv:seed[vendor,db/data/vendors.csv]
   desc "Seed model data from CSV"
   task :seed, [:model, :csv] => :environment do |t, args|
     model = Kernel.const_get args[:model].downcase.camelize
