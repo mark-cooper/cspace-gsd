@@ -12,6 +12,7 @@ namespace :csv do
   # rake csv:seed[material_process,db/data/material2process.csv]
   # rake csv:seed[material_property,db/data/material2property.csv]
   # rake csv:seed[vendor,db/data/vendors.csv]
+  # rake csv:seed[material_map,db/material_maps.csv]
   desc "Seed model data from CSV"
   task :seed, [:model, :csv] => :environment do |t, args|
     model = Kernel.const_get args[:model].downcase.camelize
@@ -19,6 +20,7 @@ namespace :csv do
 
     csv_row_counter = 0
     model_row_count = 0
+    errors          = []
 
     model.send :delete_all
     raise 'CSV file not found!' unless File.file? csv
@@ -27,7 +29,11 @@ namespace :csv do
         header_converters: ->(header) { header.to_sym },
       }) do |row|
         data = row.to_hash
-        model.send(:create!, data)
+        begin
+          model.send(:create!, data)
+        rescue Exception => ex
+          errors << "#{ex.message} for #{data}"
+        end
         csv_row_counter += 1
     end
 
@@ -37,5 +43,6 @@ namespace :csv do
     puts "\n~~~~~ CSV SEEDING COMPLETE ~~~~~"
     puts "CSV rows read:\t#{csv_row_counter}"
     puts "#{model.to_s} records imported:\t#{model_row_count.to_s}"
+    ap errors if errors.any?
   end
 end

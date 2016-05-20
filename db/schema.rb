@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519224138) do
+ActiveRecord::Schema.define(version: 20160520074019) do
 
   create_table "material_compositions", force: :cascade do |t|
     t.integer  "material_id",      null: false
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160519224138) do
   end
 
   add_index "material_forms", ["material_id"], name: "index_material_forms_on_material_id"
+
+  create_table "material_maps", force: :cascade do |t|
+    t.string "table",          null: false
+    t.string "gsd_term",       null: false
+    t.string "cspace_term"
+    t.string "cspace_label"
+    t.string "material_form"
+    t.string "material_type"
+    t.string "material_label"
+  end
 
   create_table "material_processes", force: :cascade do |t|
     t.integer  "material_id",  null: false

@@ -1,0 +1,189 @@
+table,gsd_term,cspace_term,material_form,material_type
+form,Adhesive,,[GSD manually],[GSD manually]
+form,Aggregate,aggregate,aggregate,[GSD manually]
+form,Batts,batt,batt,textile_mat
+form,Block,,,block
+form,Block,,,block
+form,Boards,board,board,sheet_rigid
+form,Cell,cell,cell,
+form,Channel,channel,channel,profile_open
+form,Cloth,cloth,cloth,textile_mat
+form,Coating,coating,coating,
+form,Composite-Fiber reinforced,,[GSD manually],
+form,Felt,,[GSD manually],textile_mat
+form,Fiber,fiber,fiber,core_thread
+form,Fiberboard,,[GSD manually],
+form,Fiber-optics,fiberoptic,fiber-optic,core_thread
+form,Film,,,film
+form,Foam,,,fluid_foam
+form,Gabion,gabion,gabion,block
+form,Gel,,,semisolid_gel
+form,Geotextile,geotextile,geotextile,
+form,Granules,,,granule
+form,Grating,grating,grating,mesh_rigid
+form,Honeycomb,,,honeycomb
+form,LCD (liquid crystal display),,[GSD manually],
+form,Leather,,leather,textile_mat
+form,LED (light emitting diode),,[GSD manually],
+form,Lenticular,,[GSD manually],
+form,Lighting,,[GSD manually],
+form,Liquid,,,fluid_liquid
+form,Louver,,[GSD manually],
+form,Lumber,lumber,lumber,
+form,Mat,,,textile_mat
+form,Mesh,,,mesh
+form,Module,,[GSD manually],
+form,Mulch,mulch,mulch,granule_irregular
+form,Paint,paint,paint,fluid_liquid
+form,Panel,,,panel
+form,Paper,paper,paper,sheet_flexible
+form,Pellets,pellets,pellet,granule_regular
+form,Pigment,,[GSD manually],
+form,Plank,plank,plank,
+form,Plywood,plywood,plywood,sheet
+form,Powder,,,granule_powder
+form,Roll,,[GSD manually],
+form,Rope,,,cord_rope
+form,Sensor,,[GSD manually],
+form,Sheet,,,sheet
+form,Shingle,,[GSD manually],
+form,Siding,,[GSD manually],
+form,Soil,,[GSD manually],granule_powder
+form,Spheres,sphere,sphere,granule_regular
+form,Tape,,,core_tape
+form,Textile,,,textile
+form,Tile,,,
+form,Tube,tube,tube,profile_hollow
+form,Veneer,veneer,veneer,sheet_flexible
+form,Wire,wire,wire,core_thread
+process,Acetylation,acetylation,,Additional Process
+process,Acid-Washed,,,Surfacing
+process,Aerated,aeration,,Deforming
+process,Anodized,,,Surfacing
+process,Bent,bending,,Deforming
+process,Cast,casting,,Additional Process
+process,CNC-Routed,cnc_cutting,,Machining
+process,Coated,coating,,Surfacing
+process,Coated,coating,,Surfacing
+process,Corrugated,corrugating,,Deforming
+process,Embossed,embossing,,Deforming
+process,Etch,etching,,Surfacing
+process,Expanded,expanding,,Deforming
+process,Extruded,extrusion,,Deforming
+process,Felted,felting,,Joining
+process,Fired,firing,,Additional Process
+process,Fired,firing,,Additional Process
+process,Float,,,Casting
+process,Foamed,foam_molding,,Molding
+process,Galvanized,galvanizing,,Surfacing
+process,Harvested,harvesting,,Additional Process
+process,Harvested,harvesting,,Additional Process
+process,Heat-Bonded,heat_bonding,,Joining
+process,Injection Molded,injection_molding,,Molding
+process,Knit,knitting,,Joining
+process,Knitted,knitting,,Joining
+process,Laminated,laminating,,Joining
+process,Melted,melting,,Deforming
+process,Mixed,mixing,,Additional Process
+process,Nonwoven,nonwoven,,Joining
+process,Perforated,perforating,,Deforming
+process,Photo-Lithographed,photolithography,,Surfacing
+process,Pigmented,pigmenting,,Additional Process
+process,Polymerized,polymerizing,,Joining
+process,Poured-In-Place,,,Additional Process
+process,Pressed,pressing,,Deforming
+process,Pressure-Treated,,,Additional Process
+process,Printed,printing,,Rapid Prototyping
+process,Pultruded,pultrusion,,Deforming
+process,Pyrolytics,,,Additional Process
+process,Recycled,,,Additional Process
+process,Sandblasted,sandblasting,,Surfacing
+process,Sheared,shearing,,Deforming
+process,Sintered,sls,,Rapid Prototyping
+process,Sprayed,spraying,,Surfacing
+process,Spun,spinning,,Deforming
+process,Spun-Bonded,spun_bonding,,Joining
+process,Stacked,stacking,,Joining
+process,Stamped,stamping,,Deforming
+process,Tanning,,,Additional Process
+process,Thermo-Formed,thermoforming,,Molding
+process,Vacuum Deposited,vacuum_deposition,,Rapid Prototyping
+process,Vacuum Melted,,,Deforming
+process,Vacuum-Formed,vacuum_forming,,Molding
+process,Vapor-Deposited,physical_vapor_deposition,,Rapid Prototyping
+process,Welded,welding,,Joining
+process,Woven,weaving,,Joining
+process,Woven (3D),weaving,,Rapid Prototyping
+property,Abrasion-Resistant,abrasion_resistant,,Durability
+property,Absorbent,,,
+property,Acoustic,acoustic,,Additional Property
+property,Anti-Static,anti_static,,Electrical
+property,Bacterial-Resistant,bacterial_resistant,,Durability
+property,Biodegradable,,,Lifecycle Component
+property,Biodegradable-,,,Lifecycle Component
+property,Chemical-Resistant,chemical_resistant,,Durability
+property,Compression Strength,,,
+property,Conductive,,,
+property,Corrosion-Resistant,corrosion_resistant,,Durability
+property,Dichroic,dichroic,,Smart material
+property,Dimensionally-Stable,dimensionally_stable,,Durability
+property,Ductile,ductile,,Additional Property
+property,Elastic,elastic,,Additional Property
+property,Electrical Resistance,,,
+property,Electroluminescent,electroluminescent,,Smart material
+property,EMI Shielding,emi_shielding,,Durability
+property,Erosion-Control,,,
+property,Fade-Resistant,fade_resistant,,Durability
+property,Filtering,,,
+property,Fire-Resistant,fire_resistant,,Durability
+property,Flexible,flexible,,Additional Property
+property,Freeze-Thaw Resistant,freeze_thaw_resistant,,Durability
+property,Fungal-Resistant,fungal_resistant,,Durability
+property,Heat-Resistant,heat_resistant,,Durability
+property,Hydrophilic,hydrophilic,,Additional Property
+property,Impact-Resistant,impact_resistant,,Durability
+property,Insulating,,,
+property,Iridescent,iridescent,,Optical
+property,Light Diffusing,light_diffusing,,Optical
+property,Light Emitting,light_emitting,,Optical
+property,Lightfastness,lightfastness,,Durability
+property,Lightweight,touch_lightweight,,Sensorial
+property,Magnetic,magnetic,,Additional Property
+property,Magneto-Rheological,magnetorheological,,Smart material
+property,Moisture-Resistant,,,Durability
+property,Moisture-Retaining,water_absorbent,,Additional Property
+property,Non-Stick,non_stick,,Additional Property
+property,Nutrient-Providing,nutrient_providing,,Additional Property
+property,Permeable,water_permeable,,Additional Property
+property,Phase Changing,phase_changing,,Smart material
+property,Photocatalytic,photocatalytic,,Smart material
+property,Photochromic,photochromatic,,Smart material
+property,Photoluminescent,photoluminescent,,Smart material
+property,Photovoltaic,photovoltaic,,Smart material
+property,Prismatic,prismatic,,Optical
+property,Recyclable,recyclable,,Lifecycle Component
+property,Recylable,,,Lifecycle Component
+property,Reflective,,,
+property,Refractive,,,
+property,Renewable,renewable_resource,,Lifecycle Component
+property,RF Shielding,rf_shielding,,Durability
+property,Rot-Resistant,rot_resistant,,Additional Property
+property,Self-Cleaning,self_cleaning,,Smart material
+property,Self-Healing,self_healing,,Smart material
+property,Self-Leveling,self_leveling,,Smart material
+property,Shape Memory,shape_memory,,Smart material
+property,Shock-Damping,shock_damping,,Durability
+property,Slip-Resistant,slip_resistant,,Additional Property
+property,Soluble,soluble,,Additional Property
+property,Stain-Resistant,stain_resistant,,Durability
+property,Tear-Resistant,tear_resistant,,Durability
+property,Temperature Control,temperature_control,,Additional Property
+property,Tensile Strength,,,
+property,Termite-Resistant,animal_resistant,,Durability
+property,Thermochromic,thermochromatic,,Smart material
+property,Time-Releasing,time_releasing,,Smart material
+property,Translucent,transparency_translucent,,Optical
+property,Transparent,transparency_transparent,,Optical
+property,UV-Resistant,uv_resistant,,Durability
+property,Water Repellent,,,Durability
+property,Water-Proof,waterproof,,Durability

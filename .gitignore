@@ -1,5 +1,6 @@
 # Ignore bundler config.
 /.bundle
+/*.xml
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
