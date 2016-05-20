@@ -20,32 +20,22 @@ class Material < ActiveRecord::Base
   end
 
   def to_cspace_xml
-    builder = Nokogiri::XML::Builder.new do |xml|
-      xml.root {
-        xml.compositions {
-          self.material_compositions.map { |p| p.composition_name.split("-", 2) }.each do |p|
-            family_name, class_name = p
-            xml.composition {
-              xml.family_name family_name
-              xml.class_name  class_name
+    builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+      xml.document(name: 'materials') {
+        xml.send(
+          'ns2:materials_common',
+          'xmlns:ns2' => 'http://collectionspace.org/services/material',
+          'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+        ) do
+          # TODO: add based on cspace field names
+          xml.materialTermGroupList {
+            xml.materialTermGroup {
+              xml.termDisplayName self.material_name
+              xml.termStatus      self.publish == 'Published' ? 'accepted' : 'under review'
+              xml.termPrefForLang 'false'
             }
-          end
-        }
-        xml.forms {
-          self.material_forms.each do |p|
-            xml.form_name p.form_name
-          end
-        }
-        xml.processes {
-          self.material_processes.each do |p|
-            xml.process_name p.process_name
-          end
-        }
-        xml.properties {
-          self.material_properties.each do |p|
-            xml.property_name p.property_name
-          end
-        }
+          }
+        end
       }
     end
     puts builder.to_xml
