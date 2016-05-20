@@ -8,6 +8,42 @@ class Material < ActiveRecord::Base
 
   before_save :sanitize
 
+  # self.common_forms
+  scope :common_forms, -> {
+    terms = [];
+    map   = MaterialMap.find_by(table: 'form');
+    forms = self.material_forms.map { |f| f.form_name }.uniq;
+    forms.each { |f| map.each { |m| terms << m.cspace_term if m.form and m.gsd_term == f } }
+  }
+
+  # self.form_types
+  scope :form_types, -> {
+    terms = [];
+    map   = MaterialMap.find_by(table: 'form');
+    forms = self.material_forms.map { |f| f.form_name }.uniq;
+    forms.each { |f| map.each { |m| terms << m.type if m.type and m.gsd_term == f } }
+  }
+
+  # additional_processes = self.processes_by_type "Additional Process"
+  # joining_processes    = self.processes_by_type "Joining"
+  scope :processes_by_type, ->(type) {
+    terms     = [];
+    map       = MaterialMap.find_by(table: 'process', type: type);
+    processes = self.material_processes.map { |p| p.process_name }.uniq;
+    processes.each { |p| map.each { |m| terms << m.cspace_term if m.gsd_term == p } };
+    return terms;
+  }
+
+  # smart_material_properties      = self.properties_by_type "Smart material"
+  # lifecycle_component_properties = self.properties_by_type "Lifecycle Component"
+  scope :properties_by_type, ->(type) {
+    terms      = [];
+    map        = MaterialMap.find_by(table: 'property', type: type);
+    properties = self.material_properties.map { |p| p.property_name }.uniq;
+    properties.each { |p| map.each { |m| terms << m.cspace_term if m.gsd_term == p } };
+    return terms;
+  }
+
   def sanitize
     { 
       strip: [],
