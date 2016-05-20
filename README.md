@@ -1,3 +1,10 @@
 # cspace-gsd
 
-###### Generated with `nrb` v.1.2.0
+CollectionSpace data mapping for GSD.
+
+License
+---
+
+The project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+---
