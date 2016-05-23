@@ -20,19 +20,25 @@ class Material < ActiveRecord::Base
 
   # if there is a (material_form a.k.a common_form) return the cspace term if matched to gsd term
   def common_forms
-    forms :material_form, :cspace_term, :cspace_label
+    forms(:material_form, :cspace_term, :cspace_label)
   end
 
   # if there is a (material_type a.k.a form_type) return the material type if matched to gsd term
   def form_types
-    forms :material_type, :material_type, :material_label
+    forms(:material_type, :material_type, :material_label)
   end
 
   def forms(map_field, map_id, map_ref)
-    terms     = []
     map       = MaterialMap.where(table: 'form')
     forms     = self.material_forms.map { |f| f.form_name }.uniq
-    forms.each { |f| map.each { |m| terms << [ m.send(map_id), m.send(map_ref) ] if m.send(map_field) and m.gsd_term == f } }
+    terms     = add_terms map, forms, map_field, map_id, map_ref
+    terms
+  end
+
+  def lifecycle_components
+    map        = MaterialMap.where(table: 'property').where(material_type: 'lifecycleComponent')
+    properties = self.material_properties.map { |p| p.property_name }.uniq
+    terms      = add_terms map, properties, :cspace_term, :cspace_term, :cspace_label
     terms
   end
 
@@ -40,12 +46,9 @@ class Material < ActiveRecord::Base
   # additional_processes = self.processes_by_type "additional"
   # joining_processes    = self.processes_by_type "joining"
   def processes_by_type(material_type)
-    terms     = []
     map       = MaterialMap.where(table: 'process', material_type: material_type)
     processes = self.material_processes.map { |p| p.process_name }.uniq
-    processes.each { |p|
-      map.each { |m| terms << [ m.cspace_term, m.cspace_label ] if m.cspace_term and m.gsd_term == p }
-    }
+    terms     = add_terms map, processes, :cspace_term, :cspace_term, :cspace_label
     terms
   end
 
@@ -53,12 +56,9 @@ class Material < ActiveRecord::Base
   # smart_material_properties      = self.properties_by_type "smartMaterial"
   # lifecycle_component_properties = self.properties_by_type "lifecycleComponent"
   def properties_by_type(material_type)
-    terms      = []
     map        = MaterialMap.where(table: 'property', material_type: material_type)
     properties = self.material_properties.map { |p| p.property_name }.uniq
-    properties.each { |p|
-      map.each { |m| terms << [ m.cspace_term, m.cspace_label ] if m.cspace_term and m.gsd_term == p }
-    }
+    terms      = add_terms map, properties, :cspace_term, :cspace_term, :cspace_label
     terms
   end
 
@@ -152,5 +152,13 @@ class Material < ActiveRecord::Base
     }.each do |method, args|
       self.attributes.each { |a, v| self[a] = v.send method, *args if v.respond_to? method }
     end
+  end
+
+  def add_terms(map, original_terms, map_field, map_id, map_ref)
+    mapped_terms = []
+    original_terms.each { |t|
+      map.each { |m| mapped_terms << [ m.send(map_id), m.send(map_ref) ] if m.send(map_field) and m.gsd_term == t }
+    }
+    mapped_terms
   end
 end

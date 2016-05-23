@@ -119,8 +119,8 @@ property,Absorbent,,,
 property,Acoustic,acoustic,,additional
 property,Anti-Static,anti_static,,electrical
 property,Bacterial-Resistant,bacterial_resistant,,durability
-property,Biodegradable,,,lifecycleComponent
-property,Biodegradable-,,,lifecycleComponent
+property,Biodegradable,biodegradable,,lifecycleComponent
+property,Biodegradable-,biodegradable,,lifecycleComponent
 property,Chemical-Resistant,chemical_resistant,,durability
 property,Compression Strength,,,
 property,Conductive,,,
@@ -162,7 +162,7 @@ property,Photoluminescent,photoluminescent,,smartMaterial
 property,Photovoltaic,photovoltaic,,smartMaterial
 property,Prismatic,prismatic,,optical
 property,Recyclable,recyclable,,lifecycleComponent
-property,Recylable,,,lifecycleComponent
+property,Recylable,recyclable,,lifecycleComponent
 property,Reflective,,,
 property,Refractive,,,
 property,Renewable,renewable_resource,,lifecycleComponent
