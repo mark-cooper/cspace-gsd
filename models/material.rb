@@ -87,12 +87,15 @@ class Material < ActiveRecord::Base
           end
 
           # PROCESS GROUPS
-          add_process_group xml, 'additional' # c.f. material_process_types -- magic
+          add_process_group xml, 'additional' # c.f. material_process_types -- magic (group unlike others)
 
           # PROPERTIES
           Material.material_property_types.each do |property_type|
             add_property_group xml, property_type
           end
+
+          # LIFECYCLE COMPONENTS
+          add_lifecycle_component_group xml
         end
       }
     end
@@ -103,7 +106,20 @@ class Material < ActiveRecord::Base
 
   def add_lifecycle_component_group(xml)
     components = self.lifecycle_components
-    #
+    if components.any?
+      components.each do |component|
+        xml.lifecycleComponentGroupList {
+          xml.lifecycleComponentGroup {
+            xml.lifecycleComponent Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "lifecyclecomponents",
+              component[0],component[1]
+            )
+          }
+        }
+      end
+    end
   end
 
   def add_process(xml, type)
@@ -111,7 +127,13 @@ class Material < ActiveRecord::Base
     if processes.any?
       processes.each do |process|
         xml.send("#{type}Processes".to_sym) {
-          xml.send("#{type}Process".to_sym, Utils::URN.generate(Nrb.config.domain, "vocabularies", "#{type}processes".downcase, process[0], process[1]))
+          xml.send("#{type}Process".to_sym, Utils::URN.generate(
+            Nrb.config.domain,
+            "vocabularies",
+            "#{type}processes".downcase,
+            process[0],
+            process[1]
+          ))
         }
       end
     end
@@ -123,7 +145,13 @@ class Material < ActiveRecord::Base
       xml.send("#{type}ProcessGroupList".to_sym) {
         processes.each do |process|
           xml.send("#{type}ProcessGroup".to_sym) {
-            xml.send("#{type}Process".to_sym, Utils::URN.generate(Nrb.config.domain, "vocabularies", "#{type}processes".downcase, process[0], process[1]))
+            xml.send("#{type}Process".to_sym, Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "#{type}processes".downcase,
+              process[0],
+              process[1]
+            ))
           }
         end
       }
@@ -136,7 +164,13 @@ class Material < ActiveRecord::Base
       xml.send("#{type}PropertyGroupList".to_sym) {
         properties.each do |property|
           xml.send("#{type}PropertyGroup".to_sym) {
-            xml.send("#{type}PropertyType".to_sym, Utils::URN.generate(Nrb.config.domain, "vocabularies", "#{type}properties".downcase, property[0], property[1]))
+            xml.send("#{type}PropertyType".to_sym, Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "#{type}properties".downcase,
+              property[0],
+              property[1]
+            ))
           }
         end
       }
