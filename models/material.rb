@@ -8,6 +8,16 @@ class Material < ActiveRecord::Base
 
   before_save :sanitize
 
+  scope :material_process_types,  -> {
+    # icky -- additional a is process group (exception)
+    MaterialMap.where(table: 'process').where.not(material_type: 'additional').pluck(:material_type).uniq.compact
+  }
+
+  scope :material_property_types, -> {
+    # yucky -- lfc is an exception
+    MaterialMap.where(table: 'property').where.not(material_type: 'lifecycleComponent').pluck(:material_type).uniq.compact
+  }
+
   # if there is a (material_form a.k.a common_form) return the cspace term if matched to gsd term
   def common_forms
     forms :material_form, :cspace_term, :cspace_label
@@ -27,8 +37,8 @@ class Material < ActiveRecord::Base
   end
 
   # get processes by type if matched to gsd term
-  # additional_processes = self.processes_by_type "Additional Process"
-  # joining_processes    = self.processes_by_type "Joining"
+  # additional_processes = self.processes_by_type "additional"
+  # joining_processes    = self.processes_by_type "joining"
   def processes_by_type(material_type)
     terms     = []
     map       = MaterialMap.where(table: 'process', material_type: material_type)
@@ -40,8 +50,8 @@ class Material < ActiveRecord::Base
   end
 
   # get properties by type if matched to gsd term
-  # smart_material_properties      = self.properties_by_type "Smart material"
-  # lifecycle_component_properties = self.properties_by_type "Lifecycle Component"
+  # smart_material_properties      = self.properties_by_type "smartMaterial"
+  # lifecycle_component_properties = self.properties_by_type "lifecycleComponent"
   def properties_by_type(material_type)
     terms      = []
     map        = MaterialMap.where(table: 'property', material_type: material_type)
@@ -71,16 +81,17 @@ class Material < ActiveRecord::Base
             }
           }
 
+          # PROCESSES
+          Material.material_process_types.each do |process_type|
+            add_process xml, process_type
+          end
+
+          # PROCESS GROUPS
+          add_process_group xml, 'additional' # c.f. material_process_types -- magic
+
           # PROPERTIES
-          durability_properties = self.properties_by_type('Durability')
-          if durability_properties.any?
-            xml.durabilityPropertyGroupList {
-              durability_properties.each do |durability_property|
-                xml.durabilityPropertyGroup {
-                  xml.durabilityPropertyType Utils::URN.generate(Nrb.config.domain, "vocabularies", "durabilityproperties", durability_property[0], durability_property[1])
-                }
-              end
-            }
+          Material.material_property_types.each do |property_type|
+            add_property_group xml, property_type
           end
         end
       }
@@ -89,6 +100,48 @@ class Material < ActiveRecord::Base
   end
 
   private
+
+  def add_lifecycle_component_group(xml)
+    components = self.lifecycle_components
+    #
+  end
+
+  def add_process(xml, type)
+    processes = self.processes_by_type type
+    if processes.any?
+      processes.each do |process|
+        xml.send("#{type}Processes".to_sym) {
+          xml.send("#{type}Process".to_sym, Utils::URN.generate(Nrb.config.domain, "vocabularies", "#{type}processes".downcase, process[0], process[1]))
+        }
+      end
+    end
+  end
+
+  def add_process_group(xml, type)
+    processes = self.processes_by_type type
+    if processes.any?
+      xml.send("#{type}ProcessGroupList".to_sym) {
+        processes.each do |process|
+          xml.send("#{type}ProcessGroup".to_sym) {
+            xml.send("#{type}Process".to_sym, Utils::URN.generate(Nrb.config.domain, "vocabularies", "#{type}processes".downcase, process[0], process[1]))
+          }
+        end
+      }
+    end
+  end
+
+  def add_property_group(xml, type)
+    properties = self.properties_by_type type
+    if properties.any?
+      xml.send("#{type}PropertyGroupList".to_sym) {
+        properties.each do |property|
+          xml.send("#{type}PropertyGroup".to_sym) {
+            xml.send("#{type}PropertyType".to_sym, Utils::URN.generate(Nrb.config.domain, "vocabularies", "#{type}properties".downcase, property[0], property[1]))
+          }
+        end
+      }
+    end
+  end
 
   def sanitize
     {

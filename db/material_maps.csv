@@ -23,7 +23,7 @@ form,Granules,,,granule
 form,Grating,grating,grating,mesh_rigid
 form,Honeycomb,,,honeycomb
 form,LCD (liquid crystal display),,[GSD manually],
-form,Leather,,leather,textile_mat
+form,Leather,leather,leather,textile_mat
 form,LED (light emitting diode),,[GSD manually],
 form,Lenticular,,[GSD manually],
 form,Lighting,,[GSD manually],
@@ -56,134 +56,134 @@ form,Tile,,,
 form,Tube,tube,tube,profile_hollow
 form,Veneer,veneer,veneer,sheet_flexible
 form,Wire,wire,wire,core_thread
-process,Acetylation,acetylation,,Additional Process
-process,Acid-Washed,,,Surfacing
-process,Aerated,aeration,,Deforming
-process,Anodized,,,Surfacing
-process,Bent,bending,,Deforming
-process,Cast,casting,,Additional Process
-process,CNC-Routed,cnc_cutting,,Machining
-process,Coated,coating,,Surfacing
-process,Coated,coating,,Surfacing
-process,Corrugated,corrugating,,Deforming
-process,Embossed,embossing,,Deforming
-process,Etch,etching,,Surfacing
-process,Expanded,expanding,,Deforming
-process,Extruded,extrusion,,Deforming
-process,Felted,felting,,Joining
-process,Fired,firing,,Additional Process
-process,Fired,firing,,Additional Process
-process,Float,,,Casting
-process,Foamed,foam_molding,,Molding
-process,Galvanized,galvanizing,,Surfacing
-process,Harvested,harvesting,,Additional Process
-process,Harvested,harvesting,,Additional Process
-process,Heat-Bonded,heat_bonding,,Joining
-process,Injection Molded,injection_molding,,Molding
-process,Knit,knitting,,Joining
-process,Knitted,knitting,,Joining
-process,Laminated,laminating,,Joining
-process,Melted,melting,,Deforming
-process,Mixed,mixing,,Additional Process
-process,Nonwoven,nonwoven,,Joining
-process,Perforated,perforating,,Deforming
-process,Photo-Lithographed,photolithography,,Surfacing
-process,Pigmented,pigmenting,,Additional Process
-process,Polymerized,polymerizing,,Joining
-process,Poured-In-Place,,,Additional Process
-process,Pressed,pressing,,Deforming
-process,Pressure-Treated,,,Additional Process
-process,Printed,printing,,Rapid Prototyping
-process,Pultruded,pultrusion,,Deforming
-process,Pyrolytics,,,Additional Process
-process,Recycled,,,Additional Process
-process,Sandblasted,sandblasting,,Surfacing
-process,Sheared,shearing,,Deforming
-process,Sintered,sls,,Rapid Prototyping
-process,Sprayed,spraying,,Surfacing
-process,Spun,spinning,,Deforming
-process,Spun-Bonded,spun_bonding,,Joining
-process,Stacked,stacking,,Joining
-process,Stamped,stamping,,Deforming
-process,Tanning,,,Additional Process
-process,Thermo-Formed,thermoforming,,Molding
-process,Vacuum Deposited,vacuum_deposition,,Rapid Prototyping
-process,Vacuum Melted,,,Deforming
-process,Vacuum-Formed,vacuum_forming,,Molding
-process,Vapor-Deposited,physical_vapor_deposition,,Rapid Prototyping
-process,Welded,welding,,Joining
-process,Woven,weaving,,Joining
-process,Woven (3D),weaving,,Rapid Prototyping
-property,Abrasion-Resistant,abrasion_resistant,,Durability
+process,Acetylation,acetylation,,additional
+process,Acid-Washed,,,surfacing
+process,Aerated,aeration,,deforming
+process,Anodized,,,surfacing
+process,Bent,bending,,deforming
+process,Cast,casting,,additional
+process,CNC-Routed,cnc_cutting,,machining
+process,Coated,coating,,surfacing
+process,Coated,coating,,surfacing
+process,Corrugated,corrugating,,deforming
+process,Embossed,embossing,,deforming
+process,Etch,etching,,surfacing
+process,Expanded,expanding,,deforming
+process,Extruded,extrusion,,deforming
+process,Felted,felting,,joining
+process,Fired,firing,,additional
+process,Fired,firing,,additional
+process,Float,,,casting
+process,Foamed,foam_molding,,molding
+process,Galvanized,galvanizing,,surfacing
+process,Harvested,harvesting,,additional
+process,Harvested,harvesting,,additional
+process,Heat-Bonded,heat_bonding,,joining
+process,Injection Molded,injection_molding,,molding
+process,Knit,knitting,,joining
+process,Knitted,knitting,,joining
+process,Laminated,laminating,,joining
+process,Melted,melting,,deforming
+process,Mixed,mixing,,additional
+process,Nonwoven,nonwoven,,joining
+process,Perforated,perforating,,deforming
+process,Photo-Lithographed,photolithography,,surfacing
+process,Pigmented,pigmenting,,additional
+process,Polymerized,polymerizing,,joining
+process,Poured-In-Place,,,additional
+process,Pressed,pressing,,deforming
+process,Pressure-Treated,,,additional
+process,Printed,printing,,rapidPrototyping
+process,Pultruded,pultrusion,,deforming
+process,Pyrolytics,,,additional
+process,Recycled,,,additional
+process,Sandblasted,sandblasting,,surfacing
+process,Sheared,shearing,,deforming
+process,Sintered,sls,,rapidPrototyping
+process,Sprayed,spraying,,surfacing
+process,Spun,spinning,,deforming
+process,Spun-Bonded,spun_bonding,,joining
+process,Stacked,stacking,,joining
+process,Stamped,stamping,,deforming
+process,Tanning,,,additional
+process,Thermo-Formed,thermoforming,,molding
+process,Vacuum Deposited,vacuum_deposition,,rapidPrototyping
+process,Vacuum Melted,,,deforming
+process,Vacuum-Formed,vacuum_forming,,molding
+process,Vapor-Deposited,physical_vapor_deposition,,rapidPrototyping
+process,Welded,welding,,joining
+process,Woven,weaving,,joining
+process,Woven (3D),weaving,,rapidPrototyping
+property,Abrasion-Resistant,abrasion_resistant,,durability
 property,Absorbent,,,
-property,Acoustic,acoustic,,Additional Property
-property,Anti-Static,anti_static,,Electrical
-property,Bacterial-Resistant,bacterial_resistant,,Durability
-property,Biodegradable,,,Lifecycle Component
-property,Biodegradable-,,,Lifecycle Component
-property,Chemical-Resistant,chemical_resistant,,Durability
+property,Acoustic,acoustic,,additional
+property,Anti-Static,anti_static,,electrical
+property,Bacterial-Resistant,bacterial_resistant,,durability
+property,Biodegradable,,,lifecycleComponent
+property,Biodegradable-,,,lifecycleComponent
+property,Chemical-Resistant,chemical_resistant,,durability
 property,Compression Strength,,,
 property,Conductive,,,
-property,Corrosion-Resistant,corrosion_resistant,,Durability
-property,Dichroic,dichroic,,Smart material
-property,Dimensionally-Stable,dimensionally_stable,,Durability
-property,Ductile,ductile,,Additional Property
-property,Elastic,elastic,,Additional Property
+property,Corrosion-Resistant,corrosion_resistant,,durability
+property,Dichroic,dichroic,,smartMaterial
+property,Dimensionally-Stable,dimensionally_stable,,durability
+property,Ductile,ductile,,additional
+property,Elastic,elastic,,additional
 property,Electrical Resistance,,,
-property,Electroluminescent,electroluminescent,,Smart material
-property,EMI Shielding,emi_shielding,,Durability
+property,Electroluminescent,electroluminescent,,smartMaterial
+property,EMI Shielding,emi_shielding,,durability
 property,Erosion-Control,,,
-property,Fade-Resistant,fade_resistant,,Durability
+property,Fade-Resistant,fade_resistant,,durability
 property,Filtering,,,
-property,Fire-Resistant,fire_resistant,,Durability
-property,Flexible,flexible,,Additional Property
-property,Freeze-Thaw Resistant,freeze_thaw_resistant,,Durability
-property,Fungal-Resistant,fungal_resistant,,Durability
-property,Heat-Resistant,heat_resistant,,Durability
-property,Hydrophilic,hydrophilic,,Additional Property
-property,Impact-Resistant,impact_resistant,,Durability
+property,Fire-Resistant,fire_resistant,,durability
+property,Flexible,flexible,,additional
+property,Freeze-Thaw Resistant,freeze_thaw_resistant,,durability
+property,Fungal-Resistant,fungal_resistant,,durability
+property,Heat-Resistant,heat_resistant,,durability
+property,Hydrophilic,hydrophilic,,additional
+property,Impact-Resistant,impact_resistant,,durability
 property,Insulating,,,
-property,Iridescent,iridescent,,Optical
-property,Light Diffusing,light_diffusing,,Optical
-property,Light Emitting,light_emitting,,Optical
-property,Lightfastness,lightfastness,,Durability
-property,Lightweight,touch_lightweight,,Sensorial
-property,Magnetic,magnetic,,Additional Property
-property,Magneto-Rheological,magnetorheological,,Smart material
-property,Moisture-Resistant,,,Durability
-property,Moisture-Retaining,water_absorbent,,Additional Property
-property,Non-Stick,non_stick,,Additional Property
-property,Nutrient-Providing,nutrient_providing,,Additional Property
-property,Permeable,water_permeable,,Additional Property
-property,Phase Changing,phase_changing,,Smart material
-property,Photocatalytic,photocatalytic,,Smart material
-property,Photochromic,photochromatic,,Smart material
-property,Photoluminescent,photoluminescent,,Smart material
-property,Photovoltaic,photovoltaic,,Smart material
-property,Prismatic,prismatic,,Optical
-property,Recyclable,recyclable,,Lifecycle Component
-property,Recylable,,,Lifecycle Component
+property,Iridescent,iridescent,,optical
+property,Light Diffusing,light_diffusing,,optical
+property,Light Emitting,light_emitting,,optical
+property,Lightfastness,lightfastness,,durability
+property,Lightweight,touch_lightweight,,sensorial
+property,Magnetic,magnetic,,additional
+property,Magneto-Rheological,magnetorheological,,smartMaterial
+property,Moisture-Resistant,,,durability
+property,Moisture-Retaining,water_absorbent,,additional
+property,Non-Stick,non_stick,,additional
+property,Nutrient-Providing,nutrient_providing,,additional
+property,Permeable,water_permeable,,additional
+property,Phase Changing,phase_changing,,smartMaterial
+property,Photocatalytic,photocatalytic,,smartMaterial
+property,Photochromic,photochromatic,,smartMaterial
+property,Photoluminescent,photoluminescent,,smartMaterial
+property,Photovoltaic,photovoltaic,,smartMaterial
+property,Prismatic,prismatic,,optical
+property,Recyclable,recyclable,,lifecycleComponent
+property,Recylable,,,lifecycleComponent
 property,Reflective,,,
 property,Refractive,,,
-property,Renewable,renewable_resource,,Lifecycle Component
-property,RF Shielding,rf_shielding,,Durability
-property,Rot-Resistant,rot_resistant,,Additional Property
-property,Self-Cleaning,self_cleaning,,Smart material
-property,Self-Healing,self_healing,,Smart material
-property,Self-Leveling,self_leveling,,Smart material
-property,Shape Memory,shape_memory,,Smart material
-property,Shock-Damping,shock_damping,,Durability
-property,Slip-Resistant,slip_resistant,,Additional Property
-property,Soluble,soluble,,Additional Property
-property,Stain-Resistant,stain_resistant,,Durability
-property,Tear-Resistant,tear_resistant,,Durability
-property,Temperature Control,temperature_control,,Additional Property
+property,Renewable,renewable_resource,,lifecycleComponent
+property,RF Shielding,rf_shielding,,durability
+property,Rot-Resistant,rot_resistant,,additional
+property,Self-Cleaning,self_cleaning,,smartMaterial
+property,Self-Healing,self_healing,,smartMaterial
+property,Self-Leveling,self_leveling,,smartMaterial
+property,Shape Memory,shape_memory,,smartMaterial
+property,Shock-Damping,shock_damping,,durability
+property,Slip-Resistant,slip_resistant,,additional
+property,Soluble,soluble,,additional
+property,Stain-Resistant,stain_resistant,,durability
+property,Tear-Resistant,tear_resistant,,durability
+property,Temperature Control,temperature_control,,additional
 property,Tensile Strength,,,
-property,Termite-Resistant,animal_resistant,,Durability
-property,Thermochromic,thermochromatic,,Smart material
-property,Time-Releasing,time_releasing,,Smart material
-property,Translucent,transparency_translucent,,Optical
-property,Transparent,transparency_transparent,,Optical
-property,UV-Resistant,uv_resistant,,Durability
-property,Water Repellent,,,Durability
-property,Water-Proof,waterproof,,Durability
+property,Termite-Resistant,animal_resistant,,durability
+property,Thermochromic,thermochromatic,,smartMaterial
+property,Time-Releasing,time_releasing,,smartMaterial
+property,Translucent,transparency_translucent,,optical
+property,Transparent,transparency_transparent,,optical
+property,UV-Resistant,uv_resistant,,durability
+property,Water Repellent,,,durability
+property,Water-Proof,waterproof,,durability
