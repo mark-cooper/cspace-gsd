@@ -21,7 +21,7 @@ class MaterialMap < ActiveRecord::Base
   end
 
   def material_empty_or_manually_to_nil
-    [:material_form, :material_type].each do |m|
+    [:cspace_term, :material_type].each do |m|
       if self.send(m) and (self.send(m).empty? or self.send(m) =~ /GSD manually/i)
         self.send("#{m}=", nil)
       end

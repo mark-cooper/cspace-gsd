@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20160520074019) do
     t.string "gsd_term",       null: false
     t.string "cspace_term"
     t.string "cspace_label"
-    t.string "material_form"
     t.string "material_type"
     t.string "material_label"
   end
