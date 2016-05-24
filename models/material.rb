@@ -73,29 +73,33 @@ class Material < ActiveRecord::Base
           # applying namespace breaks import
           xml.parent.namespace = nil
 
-          xml.materialTermGroupList {
-            xml.materialTermGroup {
-              xml.termDisplayName self.material_name
-              xml.termStatus      self.publish == 'Published' ? 'accepted' : 'under review'
-              xml.termPrefForLang 'false'
-            }
+          CollectionSpace::XML.add xml, 'shortIdentifier', self.material_id
+
+          CollectionSpace::XML.add_group xml, 'materialTerm', {
+            'termDisplayName' => self.material_name,
+            'termStatus'      => self.publish == 'Published' ? 'accepted' : 'under review',
+            'termPrefForLang' => 'false',
           }
 
           # PROCESSES
           Material.material_process_types.each do |process_type|
-            add_process xml, process_type
+            processes = self.processes_by_type process_type
+            CollectionSpace::XML.add_processes xml, process_type, processes
           end
 
-          # PROCESS GROUPS
-          add_process_group xml, 'additional' # c.f. material_process_types -- magic (group unlike others)
+          # PROCESS GROUPS -- additional is the exception
+          processes = self.processes_by_type 'additional'
+          CollectionSpace::XML.add_processes_group xml, 'additional', processes
 
           # PROPERTIES
           Material.material_property_types.each do |property_type|
-            add_property_group xml, property_type
+            properties = self.properties_by_type property_type
+            CollectionSpace::XML.add_properties_group xml, property_type, properties
           end
 
           # LIFECYCLE COMPONENTS
-          add_lifecycle_component_group xml
+          components = self.lifecycle_components
+          CollectionSpace::XML.add_lifecycle_components_group xml, components
         end
       }
     end
@@ -103,79 +107,6 @@ class Material < ActiveRecord::Base
   end
 
   private
-
-  def add_lifecycle_component_group(xml)
-    components = self.lifecycle_components
-    if components.any?
-      components.each do |component|
-        xml.lifecycleComponentGroupList {
-          xml.lifecycleComponentGroup {
-            xml.lifecycleComponent Utils::URN.generate(
-              Nrb.config.domain,
-              "vocabularies",
-              "lifecyclecomponents",
-              component[0],component[1]
-            )
-          }
-        }
-      end
-    end
-  end
-
-  def add_process(xml, type)
-    processes = self.processes_by_type type
-    if processes.any?
-      processes.each do |process|
-        xml.send("#{type}Processes".to_sym) {
-          xml.send("#{type}Process".to_sym, Utils::URN.generate(
-            Nrb.config.domain,
-            "vocabularies",
-            "#{type}processes".downcase,
-            process[0],
-            process[1]
-          ))
-        }
-      end
-    end
-  end
-
-  def add_process_group(xml, type)
-    processes = self.processes_by_type type
-    if processes.any?
-      xml.send("#{type}ProcessGroupList".to_sym) {
-        processes.each do |process|
-          xml.send("#{type}ProcessGroup".to_sym) {
-            xml.send("#{type}Process".to_sym, Utils::URN.generate(
-              Nrb.config.domain,
-              "vocabularies",
-              "#{type}processes".downcase,
-              process[0],
-              process[1]
-            ))
-          }
-        end
-      }
-    end
-  end
-
-  def add_property_group(xml, type)
-    properties = self.properties_by_type type
-    if properties.any?
-      xml.send("#{type}PropertyGroupList".to_sym) {
-        properties.each do |property|
-          xml.send("#{type}PropertyGroup".to_sym) {
-            xml.send("#{type}PropertyType".to_sym, Utils::URN.generate(
-              Nrb.config.domain,
-              "vocabularies",
-              "#{type}properties".downcase,
-              property[0],
-              property[1]
-            ))
-          }
-        end
-      }
-    end
-  end
 
   def sanitize
     {
