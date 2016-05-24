@@ -74,6 +74,7 @@ class Material < ActiveRecord::Base
           xml.parent.namespace = nil
 
           CollectionSpace::XML.add xml, 'shortIdentifier', self.material_id
+          CollectionSpace::XML.add xml, 'description', self.description
 
           CollectionSpace::XML.add_group xml, 'materialTerm', [{
             'termDisplayName' => self.material_name,
@@ -81,6 +82,49 @@ class Material < ActiveRecord::Base
             'termPrefForLang' => 'false',
           }]
 
+          # PRODUCTION ORGANIZATION
+          CollectionSpace::XML.add_group xml, 'materialProductionOrganization', [{
+            'materialProductionOrganization' => Utils::URN.generate(
+              Nrb.config.domain,
+              "orgauthorities",
+              "organization",
+              Utils::Identifiers.short_identifier(self.vendor.vendor_name),
+              self.vendor.vendor_name
+            ),
+            'materialProductionOrganizationRole' => Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "materialproductionrole",
+              'manufacturer',
+              'manufacturer'
+            ),
+          }]
+
+          # COMMON FORMS
+          common_form = self.common_forms[0]
+          CollectionSpace::XML.add xml, 'commonForm', Utils::URN.generate(
+            Nrb.config.domain,
+            "vocabularies",
+            "materialform",
+            common_form[0],
+            common_form[1]
+          ) if common_form
+
+          # FORM TYPES
+          types = self.form_types
+          CollectionSpace::XML.add_group xml, 'formType', types.map { |type|
+            {
+              'formType' => Utils::URN.generate(
+                Nrb.config.domain,
+                "vocabularies",
+                "materialformtype",
+                type[0],
+                type[1]
+              ),
+            }
+          } if types.any?
+
+          # COMPOSITIONS
           self.material_compositions.each do |composition|
             family_name, class_name = composition.composition_name.split("-")
             CollectionSpace::XML.add_group xml, 'materialComposition', [{
@@ -100,6 +144,18 @@ class Material < ActiveRecord::Base
               ),
             }]
           end
+
+          # TYPICAL USES
+          typical_use = self.material_properties.find { |mp| mp.property_name == "Erosion-Control" }
+          CollectionSpace::XML.add_repeat xml, "typicalUses", [{
+            "typicalUse" => Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "materialuse",
+              "erosion_control",
+              "erosion control"
+            ),
+          }] if typical_use
 
           # PROCESSES
           Material.material_process_types.each do |process_type|
@@ -160,6 +216,12 @@ class Material < ActiveRecord::Base
               )
             }
           } if components.any?
+
+          # EXTERNAL URL
+          CollectionSpace::XML.add_group xml, 'externalUrl', [{
+            'externalUrl'     => self.vendor.website,
+            'externalUrlNote' => self.vendor.vendor_name,
+          }]
         end
       }
     end
