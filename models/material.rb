@@ -75,31 +75,91 @@ class Material < ActiveRecord::Base
 
           CollectionSpace::XML.add xml, 'shortIdentifier', self.material_id
 
-          CollectionSpace::XML.add_group xml, 'materialTerm', {
+          CollectionSpace::XML.add_group xml, 'materialTerm', [{
             'termDisplayName' => self.material_name,
             'termStatus'      => self.publish == 'Published' ? 'accepted' : 'under review',
             'termPrefForLang' => 'false',
-          }
+          }]
+
+          self.material_compositions.each do |composition|
+            family_name, class_name = composition.composition_name.split("-")
+            CollectionSpace::XML.add_group xml, 'materialComposition', [{
+              'materialCompositionFamilyName' => Utils::URN.generate(
+                Nrb.config.domain,
+                "conceptauthorities",
+                "materialclassification",
+                Utils::Identifiers.short_identifier(family_name),
+                family_name
+              ),
+              'materialCompositionClassName'  => Utils::URN.generate(
+                Nrb.config.domain,
+                "conceptauthorities",
+                "materialclassification",
+                Utils::Identifiers.short_identifier(class_name),
+                class_name
+              ),
+            }]
+          end
 
           # PROCESSES
           Material.material_process_types.each do |process_type|
             processes = self.processes_by_type process_type
-            CollectionSpace::XML.add_processes xml, process_type, processes
+            CollectionSpace::XML.add_repeat xml, "#{process_type}Processes", processes.map { |process|
+              {
+                "#{process_type}Process" => Utils::URN.generate(
+                  Nrb.config.domain,
+                  "vocabularies",
+                  "#{process_type}processes",
+                  process[0],
+                  process[1]
+                )
+              }
+            } if processes.any?
           end
 
           # PROCESS GROUPS -- additional is the exception
           processes = self.processes_by_type 'additional'
-          CollectionSpace::XML.add_processes_group xml, 'additional', processes
+          CollectionSpace::XML.add_group xml, "additionalProcess", processes.map { |process|
+            {
+              "additionalProcess" => Utils::URN.generate(
+                Nrb.config.domain,
+                "vocabularies",
+                "additionalprocesses",
+                process[0],
+                process[1]
+              )
+            }
+          } if processes.any?
 
           # PROPERTIES
           Material.material_property_types.each do |property_type|
             properties = self.properties_by_type property_type
-            CollectionSpace::XML.add_properties_group xml, property_type, properties
+            CollectionSpace::XML.add_group xml, "#{property_type}Property", properties.map { |property|
+              {
+                "#{property_type}PropertyType" => Utils::URN.generate(
+                  Nrb.config.domain,
+                  "vocabularies",
+                  "#{property_type}properties",
+                  property[0],
+                  property[1]
+                )
+              }
+            } if properties.any?
           end
 
           # LIFECYCLE COMPONENTS
           components = self.lifecycle_components
-          CollectionSpace::XML.add_lifecycle_components_group xml, components
+          CollectionSpace::XML.add_group xml, "lifecycleComponent", components.map { |component|
+            {
+              "lifecycleComponent" => Utils::URN.generate(
+                Nrb.config.domain,
+                "vocabularies",
+                "lifecyclecomponents",
+                component[0],
+                component[1]
+              )
+            }
+          } if components.any?
         end
       }
     end
