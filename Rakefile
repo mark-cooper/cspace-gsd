@@ -95,6 +95,26 @@ namespace :export do
   end
 
   # rake export:concept_hierarchy
+  task :concept_hierarchy => :environment do |t|
+    exports_directory = "exports/concept"
+    FileUtils.mkdir_p exports_directory
+
+    CSV.open("#{exports_directory}/concept_hierarchy.csv",'w',
+        :write_headers=> true,
+        :headers => [
+          "from",
+          "to",
+        ]
+      ) do |csv|
+      Concept.all.each do |concept|
+        next if concept.broader_concept.nil?
+        csv << {
+          "from" => concept.display_name,
+          "to" => concept.broader_concept,
+        }
+      end
+    end
+  end
 
   # rake export:vendor_contacts
   task :vendor_contacts => :environment do |t|

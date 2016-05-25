@@ -20,7 +20,7 @@ rake export:all[material]
 rake export:all[concept]
 rake export:all[vendor]
 
-# create csv for vendor contacts and persons
+# create csv for concepts and vendor contacts, persons
 rake export:concept_hierarchy
 rake export:vendor_contacts
 rake export:vendor_persons
