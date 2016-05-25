@@ -3,6 +3,6 @@ class MaterialComposition < ActiveRecord::Base
   validate   :not_applicable
 
   def not_applicable
-    errors.add(composition_name: "Not applicable") if self.composition_name == "n/a"
+    errors.add(:composition_name, "Not applicable") if self.composition_name == "n/a"
   end
 end
