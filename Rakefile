@@ -6,13 +6,6 @@ require 'csv'
 
 namespace :csv do
 
-  # rake csv:seed[material,db/data/materials.csv]
-  # rake csv:seed[material_composition,db/data/material2composition.csv]
-  # rake csv:seed[material_form,db/data/material2form.csv]
-  # rake csv:seed[material_process,db/data/material2process.csv]
-  # rake csv:seed[material_property,db/data/material2property.csv]
-  # rake csv:seed[material_map,db/material_maps.csv]
-  # rake csv:seed[vendor,db/data/vendors.csv]
   desc "Seed model data from CSV"
   task :seed, [:model, :csv] => :environment do |t, args|
     model = Kernel.const_get args[:model].downcase.camelize
@@ -100,6 +93,8 @@ namespace :export do
       ap "Unable to find record for #{model.to_s} with #{field.to_s} #{id.to_s}"
     end
   end
+
+  # rake export:concept_hierarchy
 
   # rake export:vendor_contacts
   task :vendor_contacts => :environment do |t|

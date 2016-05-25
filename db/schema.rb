@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520074019) do
+ActiveRecord::Schema.define(version: 20160525233909) do
+
+  create_table "concepts", force: :cascade do |t|
+    t.string "display_name",    null: false
+    t.string "record_type",     null: false
+    t.string "broader_concept"
+  end
 
   create_table "material_compositions", force: :cascade do |t|
     t.integer  "material_id",      null: false
