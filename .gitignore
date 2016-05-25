@@ -1,6 +1,8 @@
 # Ignore bundler config.
 /.bundle
-/*.xml
+
+# Ignore XML files
+*.xml
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -8,6 +10,3 @@
 
 # Ignore CSV data files
 /db/data/*.csv
-
-# Ignore exports XML
-/exports/*.xml

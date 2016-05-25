@@ -49,13 +49,14 @@ end
 
 namespace :export do
 
-  exports_directory = "exports"
-  FileUtils.mkdir_p exports_directory
-
   # rake export:all[material]
   desc "Export all records for a model"
   task :all, [:model, :field] => :environment do |t, args|
     model = args[:model]
+
+    exports_directory = "exports/#{model}"
+    FileUtils.mkdir_p exports_directory
+
     field = (args[:field] || "#{model}_id").to_sym
     model = Kernel.const_get model.downcase.camelize
 
@@ -82,6 +83,10 @@ namespace :export do
   desc "Export a single record by model and id"
   task :record, [:model, :id, :field] => :environment do |t, args|
     model = args[:model]
+
+    exports_directory = "exports/#{model}"
+    FileUtils.mkdir_p exports_directory
+
     id    = args[:id].to_i
     field = (args[:field] || "#{model}_id").to_sym
     model = Kernel.const_get model.downcase.camelize
