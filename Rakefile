@@ -101,4 +101,62 @@ namespace :export do
     end
   end
 
+  # rake export:vendor_contacts
+  task :vendor_contacts => :environment do |t|
+    exports_directory = "exports/vendor"
+    FileUtils.mkdir_p exports_directory
+
+    CSV.open("#{exports_directory}/vendor_contacts.csv",'w',
+        :write_headers=> true,
+        :headers => [
+          "email",
+          "webAddress",
+          "telephoneNumber",
+          "faxNumber",
+          "addressType",
+          "addressPlace1",
+          "addressMunicipality",
+          "addressStateOrProvince",
+          "addressPostCode",
+          "termDisplayName",
+        ]
+      ) do |csv|
+      Vendor.all.each do |vendor|
+        next if vendor.vendor_name.nil?
+        csv << {
+          "email" => vendor.email,
+          "webAddress" => vendor.website,
+          "telephoneNumber" => vendor.phone,
+          "faxNumber" => vendor.fax,
+          "addressType" => "business",
+          "addressPlace1" => vendor.street_address,
+          "addressMunicipality" => vendor.city,
+          "addressStateOrProvince" => vendor.state,
+          "addressPostCode" => vendor.postal_code,
+          "termDisplayName" => vendor.vendor_name,
+        }
+      end
+    end
+  end
+
+  # rake export:vendor_persons
+  task :vendor_persons => :environment do |t|
+    exports_directory = "exports/vendor"
+    FileUtils.mkdir_p exports_directory
+
+    CSV.open("#{exports_directory}/vendor_persons.csv",'w',
+        :write_headers=> true,
+        :headers => [
+          "termDisplayName",
+        ]
+      ) do |csv|
+      Vendor.all.each do |vendor|
+        next if vendor.contact.nil?
+        csv << {
+          "termDisplayName" => vendor.contact,
+        }
+      end
+    end
+  end
+
 end
