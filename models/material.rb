@@ -73,7 +73,7 @@ class Material < ActiveRecord::Base
           # applying namespace breaks import
           xml.parent.namespace = nil
 
-          CollectionSpace::XML.add xml, 'shortIdentifier', self.material_id
+          CollectionSpace::XML.add xml, 'shortIdentifier', Utils::Identifiers.short_identifier(self.material_name)
           CollectionSpace::XML.add xml, 'description', self.description
 
           CollectionSpace::XML.add_group xml, 'materialTerm', [{
