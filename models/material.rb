@@ -126,7 +126,7 @@ class Material < ActiveRecord::Base
 
           # COMPOSITIONS
           self.material_compositions.each do |composition|
-            family_name, class_name = composition.composition_name.split("-")
+            family_name, class_name = composition.composition_name.split("-", 2)
             CollectionSpace::XML.add_group xml, 'materialComposition', [{
               'materialCompositionFamilyName' => Utils::URN.generate(
                 Nrb.config.domain,
@@ -225,7 +225,7 @@ class Material < ActiveRecord::Base
         end
       }
     end
-    puts builder.to_xml
+    builder.to_xml
   end
 
   private

@@ -8,3 +8,6 @@
 
 # Ignore CSV data files
 /db/data/*.csv
+
+# Ignore exports XML
+/exports/*.xml

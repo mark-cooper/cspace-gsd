@@ -46,3 +46,52 @@ namespace :csv do
     ap errors if errors.any?
   end
 end
+
+namespace :export do
+
+  exports_directory = "exports"
+  FileUtils.mkdir_p exports_directory
+
+  desc "Export all records for a model"
+  task :all, [:model, :field] => :environment do |t, args|
+    model = args[:model]
+    field = (args[:field] || "#{model}_id").to_sym
+    model = Kernel.const_get model.downcase.camelize
+
+    model_export_count = 0
+    errors             = []
+
+    model.send(:all).each do |record|
+      begin
+        id = record.send(field)
+        File.open("#{exports_directory}/#{id}.xml", 'w') { |f| f.write record.to_cspace_xml }
+        model_export_count += 1
+      rescue Exception => ex
+        errors << "Export failed for #{model.to_s} #{field.to_s} #{id}:\t#{ex.message}"
+      end
+    end
+
+    puts "\n~~~~~ EXPORT COMPLETE ~~~~~"
+    puts "Records read:\t#{model.send(:count).to_s}"
+    puts "Records exported:\t#{model_export_count.to_s}"
+    ap errors if errors.any?
+  end
+
+  desc "Export a single record by model and id"
+  task :record, [:model, :id, :field] => :environment do |t, args|
+    model = args[:model]
+    id    = args[:id].to_i
+    field = (args[:field] || "#{model}_id").to_sym
+    model = Kernel.const_get model.downcase.camelize
+
+    record =  model.send(:where, field => id).first
+    if record
+      export_path = "#{exports_directory}/#{record.send(field)}.xml"
+      File.open(export_path, 'w') { |f| f.write record.to_cspace_xml }
+      ap "Exported record for #{model.to_s} with #{field.to_s} #{id.to_s} to #{export_path}"
+    else
+      ap "Unable to find record for #{model.to_s} with #{field.to_s} #{id.to_s}"
+    end
+  end
+
+end
