@@ -52,6 +52,7 @@ namespace :export do
   exports_directory = "exports"
   FileUtils.mkdir_p exports_directory
 
+  # rake export:all[material]
   desc "Export all records for a model"
   task :all, [:model, :field] => :environment do |t, args|
     model = args[:model]
@@ -77,6 +78,7 @@ namespace :export do
     ap errors if errors.any?
   end
 
+  # rake export:record[material,17]
   desc "Export a single record by model and id"
   task :record, [:model, :id, :field] => :environment do |t, args|
     model = args[:model]
