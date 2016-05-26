@@ -66,10 +66,10 @@ PERSONS_LP="`rake cs:get:path[personauthorities] | jq '.["abstract_common_list"]
 rake cs:post:directory[$PERSONS_LP,imports/person]
 
 # generate and import the concept relationship hierarchy records
-rake cs:relate:authorities[conceptauthorities/$csid/items,concepts,imports/concept/concept_hierarchy.csv]
+rake cs:relate:authorities[$CONCEPTS_MC,concepts,imports/concept/concept_hierarchy.csv]
 
 # generate and import the organization contact records
-rake cs:relate:contacts[orgauthorities/$csid/items,imports/vendor/vendor_contacts.csv]
+rake cs:relate:contacts[$ORGS_LO,imports/vendor/vendor_contacts.csv]
 ```
 
 Done =)
