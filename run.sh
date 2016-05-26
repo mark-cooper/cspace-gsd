@@ -17,7 +17,7 @@ rake csv:seed[vendor,db/data/vendors.csv]
 
 # export records
 rake export:all[material]
-rake export:all[concept]
+rake export:all[concept,id]
 rake export:all[vendor]
 
 # create csv for concepts and vendor contacts, persons
