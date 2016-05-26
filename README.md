@@ -41,11 +41,14 @@ exports/
 Inside each directory are XML records. Copy these records to the [csible](https://github.com/lyrasis/csible) imports directory:
 
 ```
-cp -r exports/concept  ~/csible/imports
-cp -r exports/material ~/csible/imports
-cp -r exports/vendor   ~/csible/imports
+# note: adjust path to csible as appropriate
+cp -r exports/concept  ../csible/imports
+cp -r exports/material ../csible/imports
+cp -r exports/vendor   ../csible/imports
 
+cd ../csible
 # generate the person authority records
+mkdir imports/person
 rake template:cs:persons:process[imports/vendor/vendor_persons.csv,imports/person]
 
 # to import them use:

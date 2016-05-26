@@ -1,7 +1,8 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore XML files
+# Ignore files by type globally
+*.log
 *.xml
 
 # Ignore the default SQLite database.
