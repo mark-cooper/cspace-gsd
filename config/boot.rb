@@ -17,7 +17,7 @@ require 'config/nrb'
 require 'logger'
 ActiveRecord::Base.configurations = YAML.load_file('db/config.yml')
 ActiveRecord::Base.establish_connection(:development)
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.logger = Logger.new('cspace-gsd.log')
 
 # Finally require files inside resources
 Nrb.config.autoload_paths.each do |dir|
