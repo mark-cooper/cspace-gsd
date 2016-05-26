@@ -13,6 +13,22 @@ class Vendor < ActiveRecord::Base
           xml.parent.namespace = nil
 
           CollectionSpace::XML.add xml, 'shortIdentifier', Utils::Identifiers.short_identifier(self.vendor_name)
+
+          CollectionSpace::XML.add_group xml, 'orgTerm', [{
+            'termDisplayName' => self.vendor_name,
+            'mainBodyName'    => self.vendor_name,
+            'termStatus'      => 'accepted',
+          }]
+
+          CollectionSpace::XML.add_repeat xml ,'contactNames', [{
+            'contactName' => Utils::URN.generate(
+              Nrb.config.domain,
+              "personauthorities",
+              "person",
+              Utils::Identifiers.short_identifier(self.contact),
+              self.contact
+            ),
+          }] if self.contact
         end
       }
     end
