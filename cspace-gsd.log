@@ -1,3 +1,0 @@
-# Logfile created on 2016-05-25 22:13:18 -0700 by logger.rb/44203
-D, [2016-05-25T22:13:31.287854 #18328] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "materials"[0m
-D, [2016-05-25T22:13:34.040012 #18328] DEBUG -- :   [1m[35mMaterial Load (5.5ms)[0m  SELECT "materials".* FROM "materials"

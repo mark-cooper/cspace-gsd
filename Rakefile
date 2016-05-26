@@ -67,8 +67,8 @@ namespace :export do
     end
 
     puts "\n~~~~~ EXPORT COMPLETE ~~~~~"
-    puts "Records read:\t#{model.send(:count).to_s}"
-    puts "Records exported:\t#{model_export_count.to_s}"
+    puts "#{model.to_s} records read:\t#{model.send(:count).to_s}"
+    puts "#{model.to_s} records exported:\t#{model_export_count.to_s}"
     ap errors if errors.any?
   end
 
@@ -114,6 +114,8 @@ namespace :export do
         }
       end
     end
+
+    puts "\n~~~~~ CONCEPT HIERARCHY EXPORTED ~~~~~"
   end
 
   # rake export:vendor_contacts
@@ -152,6 +154,8 @@ namespace :export do
         }
       end
     end
+
+    puts "\n~~~~~ VENDOR CONTACTS EXPORTED ~~~~~"
   end
 
   # rake export:vendor_persons
@@ -172,6 +176,8 @@ namespace :export do
         }
       end
     end
+
+    puts "\n~~~~~ VENDOR PERSONS EXPORTED ~~~~~"
   end
 
 end
