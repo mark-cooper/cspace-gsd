@@ -6,5 +6,5 @@ Nrb.configure do |config|
   # config.autoload_paths = %w(models services)
 
   config.domain           = "materials.collectionspace.org"
-  config.vocabularies_url = "https://raw.githubusercontent.com/mark-cooper/cspace-application/materials_updates/tomcat-main/src/main/resources/defaults/base-instance-vocabularies.xml"
+  config.vocabularies_url = "https://raw.githubusercontent.com/collectionspace/application/master/tomcat-main/src/main/resources/defaults/base-instance-vocabularies.xml"
 end
