@@ -78,7 +78,7 @@ class Material < ActiveRecord::Base
 
           materialTermGroup = [{
             'termDisplayName' => self.material_name,
-            'termName'        => self.material_name,
+            # 'termName'        => self.material_name,
             'termStatus'      => self.publish == 'Published' ? 'accepted' : 'under review',
             'termPrefForLang' => 'false',
             'termType'        => 'descriptor',
@@ -92,7 +92,7 @@ class Material < ActiveRecord::Base
           }]
           materialTermGroup << {
             'termDisplayName' => self.generic_name,
-            'termName'        => self.generic_name,
+            # 'termName'        => self.generic_name,
             'termStatus'      => self.publish == 'Published' ? 'accepted' : 'under review',
             'termPrefForLang' => 'false',
             'termType'        => 'alternate descriptor',
