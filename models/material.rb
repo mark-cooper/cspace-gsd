@@ -76,11 +76,36 @@ class Material < ActiveRecord::Base
           CollectionSpace::XML.add xml, 'shortIdentifier', Utils::Identifiers.short_identifier(self.material_name)
           CollectionSpace::XML.add xml, 'description', self.description
 
-          CollectionSpace::XML.add_group xml, 'materialTerm', [{
+          materialTermGroup = [{
             'termDisplayName' => self.material_name,
+            'termName'        => self.material_name,
             'termStatus'      => self.publish == 'Published' ? 'accepted' : 'under review',
             'termPrefForLang' => 'false',
+            'termType'        => 'descriptor',
+            'termFlag'        => Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "materialtermflag",
+              'commercial',
+              'commercial'
+            ),
           }]
+          materialTermGroup << {
+            'termDisplayName' => self.generic_name,
+            'termName'        => self.generic_name,
+            'termStatus'      => self.publish == 'Published' ? 'accepted' : 'under review',
+            'termPrefForLang' => 'false',
+            'termType'        => 'alternate descriptor',
+            'termFlag'        => Utils::URN.generate(
+              Nrb.config.domain,
+              "vocabularies",
+              "materialtermflag",
+              'common',
+              'common'
+            ),
+          } if self.generic_name
+
+          CollectionSpace::XML.add_group xml, 'materialTerm', materialTermGroup
 
           # PRODUCTION ORGANIZATION
           CollectionSpace::XML.add_group xml, 'materialProductionOrganization', [{
