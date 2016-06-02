@@ -53,16 +53,17 @@ rake template:cs:persons:process[imports/vendor/vendor_persons.csv,imports/perso
 
 # to import them use (examples require "jq"):
 CONCEPTS_MC="`rake cs:get:path[conceptauthorities] | jq '.["abstract_common_list"]["list_item"][] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Material Classifications") | .uri' | cut -c 2-`/items"
-rake cs:post:directory[$CONCEPTS_MC,imports/concept]
 
 # no array for materials list_item by default
 MATERIALS_LM="`rake cs:get:path[materialauthorities] | jq '.["abstract_common_list"]["list_item"] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Local Materials") | .uri' | cut -c 2-`/items"
-rake cs:post:directory[$MATERIALS_LM,imports/material]
 
 ORGS_LO="`rake cs:get:path[orgauthorities] | jq '.["abstract_common_list"]["list_item"][] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Local Organizations") | .uri' | cut -c 2-`/items"
-rake cs:post:directory[$ORGS_LO,imports/vendor]
 
 PERSONS_LP="`rake cs:get:path[personauthorities] | jq '.["abstract_common_list"]["list_item"][] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Local Persons") | .uri' | cut -c 2-`/items"
+
+rake cs:post:directory[$CONCEPTS_MC,imports/concept]
+rake cs:post:directory[$MATERIALS_LM,imports/material]
+rake cs:post:directory[$ORGS_LO,imports/vendor]
 rake cs:post:directory[$PERSONS_LP,imports/person]
 
 # generate and import the concept relationship hierarchy records
