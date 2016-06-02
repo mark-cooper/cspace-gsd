@@ -59,11 +59,10 @@ form,Wire,wire,core_thread
 process,Acetylation,acetylation,additional
 process,Acid-Washed,,surfacing
 process,Aerated,aeration,deforming
-process,Anodized,,surfacing
+process,Anodized,anodizing,surfacing
 process,Bent,bending,deforming
 process,Cast,casting,additional
 process,CNC-Routed,cnc_cutting,machining
-process,Coated,coating,surfacing
 process,Coated,coating,surfacing
 process,Corrugated,corrugating,deforming
 process,Embossed,embossing,deforming
@@ -96,7 +95,7 @@ process,Pressure-Treated,,additional
 process,Printed,printing,rapidPrototyping
 process,Pultruded,pultrusion,deforming
 process,Pyrolytics,,additional
-process,Recycled,,additional
+process,Recycled,recycled,additional
 process,Sandblasted,sandblasting,surfacing
 process,Sheared,shearing,deforming
 process,Sintered,sls,rapidPrototyping
@@ -113,7 +112,7 @@ process,Vacuum-Formed,vacuum_forming,molding
 process,Vapor-Deposited,physical_vapor_deposition,rapidPrototyping
 process,Welded,welding,joining
 process,Woven,weaving,joining
-process,Woven (3D),weaving,rapidPrototyping
+process,Woven (3D),weaving_3d,rapidPrototyping
 property,Abrasion-Resistant,abrasion_resistant,durability
 property,Absorbent,,
 property,Acoustic,acoustic,additional
