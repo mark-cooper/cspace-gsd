@@ -57,12 +57,12 @@ form,Tube,tube,profile_hollow
 form,Veneer,veneer,sheet_flexible
 form,Wire,wire,core_thread
 process,Acetylation,acetylation,additional
-process,Acid-Washed,,surfacing
+process,Acid-Washed,acid_washing,surfacing
 process,Aerated,aeration,deforming
 process,Anodized,anodizing,surfacing
 process,Bent,bending,deforming
 process,Cast,casting,additional
-process,CNC-Routed,cnc_cutting,machining
+process,CNC-Routed,cnc_routing,machining
 process,Coated,coating,surfacing
 process,Corrugated,corrugating,deforming
 process,Embossed,embossing,deforming
@@ -72,7 +72,7 @@ process,Extruded,extrusion,deforming
 process,Felted,felting,joining
 process,Fired,firing,additional
 process,Fired,firing,additional
-process,Float,,casting
+process,Float,floating,casting
 process,Foamed,foam_molding,molding
 process,Galvanized,galvanizing,surfacing
 process,Harvested,harvesting,additional
@@ -89,12 +89,12 @@ process,Perforated,perforating,deforming
 process,Photo-Lithographed,photolithography,surfacing
 process,Pigmented,pigmenting,additional
 process,Polymerized,polymerizing,joining
-process,Poured-In-Place,,additional
+process,Poured-In-Place,poured_in_place,additional
 process,Pressed,pressing,deforming
-process,Pressure-Treated,,additional
+process,Pressure-Treated,pressure_treating,additional
 process,Printed,printing,rapidPrototyping
 process,Pultruded,pultrusion,deforming
-process,Pyrolytics,,additional
+process,Pyrolytics,pyrolysis,additional
 process,Recycled,recycled,additional
 process,Sandblasted,sandblasting,surfacing
 process,Sheared,shearing,deforming
@@ -104,10 +104,10 @@ process,Spun,spinning,deforming
 process,Spun-Bonded,spun_bonding,joining
 process,Stacked,stacking,joining
 process,Stamped,stamping,deforming
-process,Tanning,,additional
+process,Tanning,tanning,additional
 process,Thermo-Formed,thermoforming,molding
 process,Vacuum Deposited,vacuum_deposition,rapidPrototyping
-process,Vacuum Melted,,deforming
+process,Vacuum Melted,vacuum_melting,deforming
 process,Vacuum-Formed,vacuum_forming,molding
 process,Vapor-Deposited,physical_vapor_deposition,rapidPrototyping
 process,Welded,welding,joining
@@ -130,7 +130,7 @@ property,Ductile,ductile,additional
 property,Elastic,elastic,additional
 property,Electrical Resistance,,
 property,Electroluminescent,electroluminescent,smartMaterial
-property,EMI Shielding,emi_shielding,durability
+property,EMI Shielding,emi_interference,durability
 property,Erosion-Control,,
 property,Fade-Resistant,fade_resistant,durability
 property,Filtering,,
@@ -149,7 +149,7 @@ property,Lightfastness,lightfastness,durability
 property,Lightweight,touch_lightweight,sensorial
 property,Magnetic,magnetic,additional
 property,Magneto-Rheological,magnetorheological,smartMaterial
-property,Moisture-Resistant,,durability
+property,Moisture-Resistant,water_repellent,durability
 property,Moisture-Retaining,water_absorbent,additional
 property,Non-Stick,non_stick,additional
 property,Nutrient-Providing,nutrient_providing,additional
@@ -184,5 +184,5 @@ property,Time-Releasing,time_releasing,smartMaterial
 property,Translucent,transparency_translucent,optical
 property,Transparent,transparency_transparent,optical
 property,UV-Resistant,uv_resistant,durability
-property,Water Repellent,,durability
+property,Water Repellent,water_repellent,durability
 property,Water-Proof,waterproof,durability
