@@ -40,7 +40,7 @@ exports/
 
 Inside each directory are XML records. Copy these records to the [csible](https://github.com/lyrasis/csible) imports directory:
 
-```
+```bash
 # note: adjust path to csible as appropriate
 cp -r exports/concept  ../csible/imports
 cp -r exports/material ../csible/imports
