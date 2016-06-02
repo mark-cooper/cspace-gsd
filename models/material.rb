@@ -150,9 +150,10 @@ class Material < ActiveRecord::Base
           } if types.any?
 
           # COMPOSITIONS
+          compositions = []
           self.material_compositions.each do |composition|
             family_name, class_name = composition.composition_name.split("-", 2)
-            CollectionSpace::XML.add_group xml, 'materialComposition', [{
+            compositions << {
               'materialCompositionFamilyName' => Utils::URN.generate(
                 Nrb.config.domain,
                 "conceptauthorities",
@@ -167,8 +168,9 @@ class Material < ActiveRecord::Base
                 Utils::Identifiers.short_identifier(class_name),
                 class_name
               ),
-            }]
+            }
           end
+          CollectionSpace::XML.add_group xml, 'materialComposition', compositions
 
           # TYPICAL USES
           typical_use = self.material_properties.find { |mp| mp.property_name == "Erosion-Control" }
