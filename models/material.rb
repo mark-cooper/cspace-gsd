@@ -190,7 +190,7 @@ class Material < ActiveRecord::Base
                 "#{process_type}Process" => Utils::URN.generate(
                   Nrb.config.domain,
                   "vocabularies",
-                  "#{process_type}processes",
+                  "#{process_type}processes".downcase,
                   process[0],
                   process[1]
                 )
@@ -220,7 +220,7 @@ class Material < ActiveRecord::Base
                 "#{property_type}PropertyType" => Utils::URN.generate(
                   Nrb.config.domain,
                   "vocabularies",
-                  "#{property_type}properties",
+                  "#{property_type}properties".downcase,
                   property[0],
                   property[1]
                 )
