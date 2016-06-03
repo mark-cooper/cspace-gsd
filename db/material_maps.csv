@@ -11,9 +11,9 @@ form,Cloth,cloth,textile_mat
 form,Coating,coating,
 form,Composite-Fiber reinforced,[GSD manually],
 form,Felt,[GSD manually],textile_mat
-form,Fiber,fiber,core_thread
+form,Fiber,fiber,cord_thread
 form,Fiberboard,[GSD manually],
-form,Fiber-optics,fiberoptic,core_thread
+form,Fiber-optics,fiberoptic,cord_thread
 form,Film,,film
 form,Foam,,fluid_foam
 form,Gabion,gabion,block
@@ -50,12 +50,12 @@ form,Shingle,[GSD manually],
 form,Siding,[GSD manually],
 form,Soil,[GSD manually],granule_powder
 form,Spheres,sphere,granule_regular
-form,Tape,,core_tape
+form,Tape,,cord_tape
 form,Textile,,textile
 form,Tile,,
 form,Tube,tube,profile_hollow
 form,Veneer,veneer,sheet_flexible
-form,Wire,wire,core_thread
+form,Wire,wire,cord_thread
 process,Acetylation,acetylation,additional
 process,Acid-Washed,acid_washing,surfacing
 process,Aerated,aeration,deforming
