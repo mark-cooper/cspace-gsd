@@ -42,6 +42,11 @@ Inside each directory are XML records. Copy these records to the [csible](https:
 
 ```bash
 # note: adjust path to csible as appropriate
+rm -rf ../csible/imports/concept
+rm -rf ../csible/imports/material
+rm -rf ../csible/imports/person
+rm -rf ../csible/imports/vendor
+
 cp -r exports/concept  ../csible/imports
 cp -r exports/material ../csible/imports
 cp -r exports/vendor   ../csible/imports
