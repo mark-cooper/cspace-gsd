@@ -4,6 +4,7 @@
 # Ignore files by type globally
 *.log
 *.xml
+*.zip
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
