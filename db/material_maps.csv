@@ -3,7 +3,6 @@ form,Adhesive,[GSD manually],[GSD manually]
 form,Aggregate,aggregate,[GSD manually]
 form,Batts,batt,textile_mat
 form,Block,,block
-form,Block,,block
 form,Boards,board,sheet_rigid
 form,Cell,cell,
 form,Channel,channel,profile_open
@@ -71,11 +70,9 @@ process,Expanded,expanding,deforming
 process,Extruded,extrusion,deforming
 process,Felted,felting,joining
 process,Fired,firing,additional
-process,Fired,firing,additional
 process,Float,floating,casting
 process,Foamed,foam_molding,molding
 process,Galvanized,galvanizing,surfacing
-process,Harvested,harvesting,additional
 process,Harvested,harvesting,additional
 process,Heat-Bonded,heat_bonding,joining
 process,Injection Molded,injection_molding,molding
