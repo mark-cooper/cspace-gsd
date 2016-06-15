@@ -6,7 +6,7 @@ module CollectionSpace
       xml.send(key.to_sym, value)
     end
 
-    def self.add_group(xml, key, elements = [])
+    def self.add_group_list(xml, key, elements = [])
       xml.send("#{key}GroupList".to_sym) {
         elements.each do |element|
           xml.send("#{key}Group".to_sym) {

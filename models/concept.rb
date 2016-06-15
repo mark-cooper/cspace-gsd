@@ -13,7 +13,7 @@ class Concept < ActiveRecord::Base
 
           CollectionSpace::XML.add xml, 'shortIdentifier', Utils::Identifiers.short_identifier(self.display_name)
 
-          CollectionSpace::XML.add_group xml, 'conceptTerm', [{
+          CollectionSpace::XML.add_group_list xml, 'conceptTerm', [{
             'termDisplayName' => self.display_name,
             'termStatus'      => 'accepted',
           }]

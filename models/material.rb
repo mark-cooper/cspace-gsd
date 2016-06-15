@@ -105,10 +105,10 @@ class Material < ActiveRecord::Base
             ),
           } if self.generic_name
 
-          CollectionSpace::XML.add_group xml, 'materialTerm', materialTermGroup
+          CollectionSpace::XML.add_group_list xml, 'materialTerm', materialTermGroup
 
           # PRODUCTION ORGANIZATION
-          CollectionSpace::XML.add_group xml, 'materialProductionOrganization', [{
+          CollectionSpace::XML.add_group_list xml, 'materialProductionOrganization', [{
             'materialProductionOrganization' => Utils::URN.generate(
               Nrb.config.domain,
               "orgauthorities",
@@ -137,7 +137,7 @@ class Material < ActiveRecord::Base
 
           # FORM TYPES
           types = self.form_types
-          CollectionSpace::XML.add_group xml, 'formType', types.map { |type|
+          CollectionSpace::XML.add_group_list xml, 'formType', types.map { |type|
             {
               'formType' => Utils::URN.generate(
                 Nrb.config.domain,
@@ -170,7 +170,7 @@ class Material < ActiveRecord::Base
               ),
             }
           end
-          CollectionSpace::XML.add_group xml, 'materialComposition', compositions
+          CollectionSpace::XML.add_group_list xml, 'materialComposition', compositions
 
           # TYPICAL USES
           typical_use = self.material_properties.find { |mp| mp.property_name == "Erosion-Control" }
@@ -202,7 +202,7 @@ class Material < ActiveRecord::Base
 
           # PROCESS GROUPS -- additional is the exception
           processes = self.processes_by_type 'additional'
-          CollectionSpace::XML.add_group xml, "additionalProcess", processes.map { |process|
+          CollectionSpace::XML.add_group_list xml, "additionalProcess", processes.map { |process|
             {
               "additionalProcess" => Utils::URN.generate(
                 Nrb.config.domain,
@@ -217,7 +217,7 @@ class Material < ActiveRecord::Base
           # PROPERTIES
           Material.material_property_types.each do |property_type|
             properties = self.properties_by_type property_type
-            CollectionSpace::XML.add_group xml, "#{property_type}Property", properties.map { |property|
+            CollectionSpace::XML.add_group_list xml, "#{property_type}Property", properties.map { |property|
               {
                 "#{property_type}PropertyType" => Utils::URN.generate(
                   Nrb.config.domain,
@@ -232,7 +232,7 @@ class Material < ActiveRecord::Base
 
           # LIFECYCLE COMPONENTS
           components = self.lifecycle_components
-          CollectionSpace::XML.add_group xml, "lifecycleComponent", components.map { |component|
+          CollectionSpace::XML.add_group_list xml, "lifecycleComponent", components.map { |component|
             {
               "lifecycleComponent" => Utils::URN.generate(
                 Nrb.config.domain,
@@ -245,7 +245,7 @@ class Material < ActiveRecord::Base
           } if components.any?
 
           # EXTERNAL URL
-          CollectionSpace::XML.add_group xml, 'externalUrl', [{
+          CollectionSpace::XML.add_group_list xml, 'externalUrl', [{
             'externalUrl'     => self.vendor.website,
             'externalUrlNote' => self.vendor.vendor_name,
           }]

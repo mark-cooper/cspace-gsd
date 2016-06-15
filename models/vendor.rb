@@ -14,7 +14,7 @@ class Vendor < ActiveRecord::Base
 
           CollectionSpace::XML.add xml, 'shortIdentifier', Utils::Identifiers.short_identifier(self.vendor_name)
 
-          CollectionSpace::XML.add_group xml, 'orgTerm', [{
+          CollectionSpace::XML.add_group_list xml, 'orgTerm', [{
             'termDisplayName' => self.vendor_name,
             'mainBodyName'    => self.vendor_name,
             'termStatus'      => 'accepted',
