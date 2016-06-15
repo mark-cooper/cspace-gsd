@@ -42,14 +42,16 @@ Inside each directory are XML records. Copy these records to the [csible](https:
 
 ```bash
 # note: adjust path to csible as appropriate
+rm -rf ../csible/imports/cataloging
 rm -rf ../csible/imports/concept
 rm -rf ../csible/imports/material
 rm -rf ../csible/imports/person
 rm -rf ../csible/imports/vendor
 
-cp -r exports/concept  ../csible/imports
-cp -r exports/material ../csible/imports
-cp -r exports/vendor   ../csible/imports
+cp -r exports/cataloging ../csible/imports
+cp -r exports/concept    ../csible/imports
+cp -r exports/material   ../csible/imports
+cp -r exports/vendor     ../csible/imports
 
 cd ../csible
 # generate the person authority records
@@ -57,15 +59,12 @@ mkdir imports/person
 rake template:cs:persons:process[imports/vendor/vendor_persons.csv,imports/person]
 
 # to import them use (examples require "jq"):
-CONCEPTS_MC="`rake cs:get:path[conceptauthorities] | jq '.["abstract_common_list"]["list_item"][] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Material Classifications") | .uri' | cut -c 2-`/items"
+CONCEPTS_MC="conceptauthorities/urn:cspace:name(materialclassification)/items"
+MATERIALS_LM="materialauthorities/urn:cspace:name(material)/items"
+ORGS_LO="orgauthorities/urn:cspace:name(organization)/items"
+PERSONS_LP="personauthorities/urn:cspace:name(person)/items"
 
-# no array for materials list_item by default
-MATERIALS_LM="`rake cs:get:path[materialauthorities] | jq '.["abstract_common_list"]["list_item"] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Local Materials") | .uri' | cut -c 2-`/items"
-
-ORGS_LO="`rake cs:get:path[orgauthorities] | jq '.["abstract_common_list"]["list_item"][] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Local Organizations") | .uri' | cut -c 2-`/items"
-
-PERSONS_LP="`rake cs:get:path[personauthorities] | jq '.["abstract_common_list"]["list_item"][] | {uri: .uri, displayName: .displayName}' | jq -r 'select(.displayName == "Local Persons") | .uri' | cut -c 2-`/items"
-
+rake cs:post:directory[collectionobjects,imports/cataloging]
 rake cs:post:directory[$CONCEPTS_MC,imports/concept]
 rake cs:post:directory[$MATERIALS_LM,imports/material]
 rake cs:post:directory[$ORGS_LO,imports/vendor]

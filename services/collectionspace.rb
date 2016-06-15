@@ -16,6 +16,16 @@ module CollectionSpace
       }
     end
 
+    def self.add_list(xml, key, elements = [])
+      xml.send("#{key}List".to_sym) {
+        elements.each do |element|
+          xml.send("#{key}".to_sym) {
+            element.each { |k, v| xml.send(k.to_sym, v) }
+          }
+        end
+      }
+    end
+
     def self.add_repeat(xml, key, elements = [])
       xml.send(key.to_sym) {
         elements.each do |element|

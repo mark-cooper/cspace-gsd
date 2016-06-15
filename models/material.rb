@@ -252,7 +252,60 @@ class Material < ActiveRecord::Base
         end
       }
     end
-    builder.to_xml
+    # collectionspace requires the namespace applied to the schema element and NO other!
+    builder.to_xml.to_s.gsub(/(<\/?)(\w+_)/, '\1ns2:\2')
+  end
+
+  # material model is for material authorities and cataloging procedure records,
+  # as this represents the full scope of the migration this is passable for this project
+  def to_cspace_xml_cat
+    builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+      xml.document(name: 'collectionobjects') {
+        xml.send(
+          'ns2:collectionobjects_common',
+          'xmlns:ns2' => 'http://collectionspace.org/services/collectionobject',
+          'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+        ) do
+          # applying namespace breaks import
+          xml.parent.namespace = nil
+
+          accession_number = sprintf("%06d", self.accession_number) unless self.accession_number =~ /^0+/
+          CollectionSpace::XML.add xml, 'objectNumber', accession_number
+
+          library_locations = self.library_location.split(",").map(&:strip) rescue []
+          library_locations = library_locations.map { |location|
+            {
+              "numberValue" => location,
+              "numberType"  => 'callnumber',
+            }
+          } if library_locations.any?
+          CollectionSpace::XML.add_list xml, 'otherNumber', library_locations
+
+          CollectionSpace::XML.add xml, 'collection', 'circulating'
+
+          # this sounds like a list but is actually a plain ol' repeat
+          CollectionSpace::XML.add_repeat xml, 'objectStatusList', [{ "objectStatus" => "sample" }]
+
+          year_introduced = self.year_introduced.to_s
+          CollectionSpace::XML.add_group_list xml, 'objectProductionDate', [{
+            'dateDisplayDate' => year_introduced,
+            'dateEarliestSingleYear' => year_introduced,
+          }] if year_introduced.length == 4
+
+          CollectionSpace::XML.add_group_list xml, 'material', [{
+            "material" => Utils::URN.generate(
+              Nrb.config.domain,
+              "materialauthorities",
+              "material",
+              Utils::Identifiers.short_identifier(self.material_name),
+              self.material_name
+            )
+          }]
+        end
+      }
+    end
+    # collectionspace requires the namespace applied to the schema element and NO other!
+    builder.to_xml.to_s.gsub(/(<\/?)(\w+_)/, '\1ns2:\2')
   end
 
   private

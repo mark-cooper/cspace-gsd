@@ -44,14 +44,16 @@ namespace :export do
 
   # rake export:all[material]
   desc "Export all records for a model"
-  task :all, [:model, :field] => :environment do |t, args|
-    model = args[:model]
+  task :all, [:model, :field, :method, :directory] => :environment do |t, args|
+    directory = args[:directory]
+    model     = args[:model]
 
-    exports_directory = "exports/#{model}"
+    exports_directory = directory ? "exports/#{directory}" : "exports/#{model}"
     FileUtils.mkdir_p exports_directory
 
-    field = (args[:field] || "#{model}_id").to_sym
-    model = Kernel.const_get model.downcase.camelize
+    field  = (args[:field]  || "#{model}_id").to_sym
+    method = (args[:method] || "to_cspace_xml").to_sym
+    model  = Kernel.const_get model.downcase.camelize
 
     model_export_count = 0
     errors             = []
@@ -59,7 +61,7 @@ namespace :export do
     model.send(:all).each do |record|
       begin
         id = record.send(field)
-        File.open("#{exports_directory}/#{id}.xml", 'w') { |f| f.write record.to_cspace_xml }
+        File.open("#{exports_directory}/#{id}.xml", 'w') { |f| f.write record.send(method) }
         model_export_count += 1
       rescue Exception => ex
         errors << "Export failed for #{model.to_s} #{field.to_s} #{id}:\t#{ex.message}"
@@ -74,20 +76,22 @@ namespace :export do
 
   # rake export:record[material,17]
   desc "Export a single record by model and id"
-  task :record, [:model, :id, :field] => :environment do |t, args|
-    model = args[:model]
+  task :record, [:model, :id, :field, :method, :directory] => :environment do |t, args|
+    directory = args[:directory]
+    model     = args[:model]
 
-    exports_directory = "exports/#{model}"
+    exports_directory = directory ? "exports/#{directory}" : "exports/#{model}"
     FileUtils.mkdir_p exports_directory
 
-    id    = args[:id].to_i
-    field = (args[:field] || "#{model}_id").to_sym
-    model = Kernel.const_get model.downcase.camelize
+    id     = args[:id].to_i
+    field  = (args[:field] || "#{model}_id").to_sym
+    method = (args[:method] || "to_cspace_xml").to_sym
+    model  = Kernel.const_get model.downcase.camelize
 
     record =  model.send(:where, field => id).first
     if record
       export_path = "#{exports_directory}/#{record.send(field)}.xml"
-      File.open(export_path, 'w') { |f| f.write record.to_cspace_xml }
+      File.open(export_path, 'w') { |f| f.write record.send(method) }
       ap "Exported record for #{model.to_s} with #{field.to_s} #{id.to_s} to #{export_path}"
     else
       ap "Unable to find record for #{model.to_s} with #{field.to_s} #{id.to_s}"

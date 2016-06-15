@@ -1,28 +1,29 @@
 #!/bin/bash
 
 # setup db and run migrations
-rake db:drop
-rake db:create
-rake db:migrate
+bundle exec rake db:drop
+bundle exec rake db:create
+bundle exec rake db:migrate
 
 # load gsd data (must be added to db/data directory)
-rake csv:seed[material,db/data/materials.csv]
-rake csv:seed[material_composition,db/data/material2composition.csv]
-rake csv:seed[material_form,db/data/material2form.csv]
-rake csv:seed[material_process,db/data/material2process.csv]
-rake csv:seed[material_property,db/data/material2property.csv]
-rake csv:seed[material_map,db/material_maps.csv]
-rake csv:seed[concept,db/data/concepts.csv]
-rake csv:seed[vendor,db/data/vendors.csv]
+bundle exec rake csv:seed[material,db/data/materials.csv]
+bundle exec rake csv:seed[material_composition,db/data/material2composition.csv]
+bundle exec rake csv:seed[material_form,db/data/material2form.csv]
+bundle exec rake csv:seed[material_process,db/data/material2process.csv]
+bundle exec rake csv:seed[material_property,db/data/material2property.csv]
+bundle exec rake csv:seed[material_map,db/material_maps.csv]
+bundle exec rake csv:seed[concept,db/data/concepts.csv]
+bundle exec rake csv:seed[vendor,db/data/vendors.csv]
 
 # export records
-rake export:all[material]
-rake export:all[concept,id]
-rake export:all[vendor]
+bundle exec rake export:all[material]
+bundle exec rake export:all[material,material_id,to_cspace_xml_cat,cataloging]
+bundle exec rake export:all[concept,id]
+bundle exec rake export:all[vendor]
 
 # create csv for concepts and vendor contacts, persons
-rake export:concept_hierarchy
-rake export:vendor_contacts
-rake export:vendor_persons
+bundle exec rake export:concept_hierarchy
+bundle exec rake export:vendor_contacts
+bundle exec rake export:vendor_persons
 
 # done =)
