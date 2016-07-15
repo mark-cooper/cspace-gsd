@@ -59,10 +59,10 @@ mkdir imports/person
 rake template:cs:persons:process[imports/vendor/vendor_persons.csv,imports/person]
 
 # to import them use (examples require "jq"):
-CONCEPTS_MC="conceptauthorities/urn:cspace:name(materialclassification)/items"
-MATERIALS_LM="materialauthorities/urn:cspace:name(material)/items"
-ORGS_LO="orgauthorities/urn:cspace:name(organization)/items"
-PERSONS_LP="personauthorities/urn:cspace:name(person)/items"
+CONCEPTS_MC="conceptauthorities/urn:cspace:name(materialclassification_shared)/items"
+MATERIALS_LM="materialauthorities/urn:cspace:name(material_shared)/items"
+ORGS_LO="orgauthorities/urn:cspace:name(organization_shared)/items"
+PERSONS_LP="personauthorities/urn:cspace:name(person_shared)/items"
 
 rake cs:post:directory[collectionobjects,imports/cataloging]
 rake cs:post:directory[$CONCEPTS_MC,imports/concept]
