@@ -311,12 +311,13 @@ class Material < ActiveRecord::Base
   private
 
   def sanitize
-    {
-      strip: [],
-      squeeze: ["\n"],
-      squeeze: [" "],
-      gsub: [Regexp.new("(\n|\t)"), " "]
-    }.each do |method, args|
+    [
+      :strip, [],
+      :squeeze, ["\n"],
+      :squeeze, [" "],
+      :gsub, [Regexp.new("(\n|\t)"), " "],
+    ].each_slice(2) do |method_args|
+      method, args = method_args
       self.attributes.each { |a, v| self[a] = v.send method, *args if v.respond_to? method }
     end
   end
