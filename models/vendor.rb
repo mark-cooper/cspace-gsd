@@ -24,7 +24,7 @@ class Vendor < ActiveRecord::Base
             'contactName' => Utils::URN.generate(
               Nrb.config.domain,
               "personauthorities",
-              "person",
+              "person_shared",
               Utils::Identifiers.short_identifier(self.contact),
               self.contact
             ),

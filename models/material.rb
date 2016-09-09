@@ -112,7 +112,7 @@ class Material < ActiveRecord::Base
             'materialProductionOrganization' => Utils::URN.generate(
               Nrb.config.domain,
               "orgauthorities",
-              "organization",
+              "organization_shared",
               Utils::Identifiers.short_identifier(self.vendor.vendor_name),
               self.vendor.vendor_name
             ),
@@ -157,14 +157,14 @@ class Material < ActiveRecord::Base
               'materialCompositionFamilyName' => Utils::URN.generate(
                 Nrb.config.domain,
                 "conceptauthorities",
-                "materialclassification",
+                "materialclassification_shared",
                 Utils::Identifiers.short_identifier(family_name),
                 family_name
               ),
               'materialCompositionClassName'  => Utils::URN.generate(
                 Nrb.config.domain,
                 "conceptauthorities",
-                "materialclassification",
+                "materialclassification_shared",
                 Utils::Identifiers.short_identifier(class_name),
                 class_name
               ),
@@ -296,7 +296,7 @@ class Material < ActiveRecord::Base
             "material" => Utils::URN.generate(
               Nrb.config.domain,
               "materialauthorities",
-              "material",
+              "material_shared",
               Utils::Identifiers.short_identifier(self.material_name),
               self.material_name
             )
